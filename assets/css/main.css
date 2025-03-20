@@ -1,0 +1,42 @@
+@import url("fontawesome-all.min.css");
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,600;1,400&family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&family=Rozha+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Slab:ital,wght@0,400;0,600;1,400&family=Italiana&family=Stardos+Stencil:wght@400;700&family=Rye&family=Fredericka+the+Great&family=Lobster&family=Sacramento&family=Special+Elite&family=Homemade+Apple&family=Satisfy&display=swap");
+
+
+:root {
+  --primary-color: #b28571;
+  --second-color: #222222;
+  --three-color: #ffffff;
+  --cuat-color: #b28571;
+  --text-color: #1c1c1c;
+  --text-colorBack: #ffffff;
+  --colorFondo: #e9e2d2;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-modern: 'Poppins', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-vintage-1: 'Abril Fatface', cursive;
+  --font-vintage-2: 'Libre Baskerville', serif;
+  --font-vintage-3: 'Old Standard TT', serif;
+  --font-vintage-4: 'Cinzel', serif;
+  --font-vintage-5: 'Lora', serif;
+  --font-vintage-6: 'Crimson Text', serif;
+  --font-vintage-7: 'IM Fell English', serif;
+  --font-vintage-8: 'Spectral', serif;
+  --font-vintage-9: 'Bodoni Moda', serif;
+  --font-vintage-10: 'Rozha One', serif;
+  --font-art-deco-1: 'Poiret One', cursive;
+  --font-art-deco-2: 'Josefin Slab', serif;
+  --font-art-deco-3: 'Italiana', serif;
+  --font-art-deco-4: 'Stardos Stencil', cursive;
+  --font-art-deco-5: 'Rye', cursive;
+  --font-art-deco-6: 'Fredericka the Great', cursive;
+  /* Fuentes Retro */
+  --font-retro-1: 'Lobster', cursive;
+  --font-retro-2: 'Sacramento', cursive;
+  --font-retro-3: 'Special Elite', cursive;
+  --font-retro-4: 'Homemade Apple', cursive;
+  --font-retro-5: 'Satisfy', cursive;
+}
