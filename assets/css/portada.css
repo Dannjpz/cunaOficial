@@ -39,8 +39,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.712);
   z-index: 5;
   pointer-events: none;
@@ -142,51 +142,51 @@ body {
 
 @keyframes pendulumSwing {
   0% {
-    transform: rotate(0deg);
+    transform: translateZ(0) rotate(0deg);
   }
 
   5% {
-    transform: rotate(-12deg);
+    transform: translateZ(0) rotate(-12deg);
   }
 
   15% {
-    transform: rotate(10deg);
+    transform: translateZ(0) rotate(10deg);
   }
 
   25% {
-    transform: rotate(-8deg);
+    transform: translateZ(0) rotate(-8deg);
   }
 
   35% {
-    transform: rotate(6deg);
+    transform: translateZ(0) rotate(6deg);
   }
 
   45% {
-    transform: rotate(-5deg);
+    transform: translateZ(0) rotate(-5deg);
   }
 
   55% {
-    transform: rotate(4deg);
+    transform: translateZ(0) rotate(4deg);
   }
 
   65% {
-    transform: rotate(-3deg);
+    transform: translateZ(0) rotate(-3deg);
   }
 
   75% {
-    transform: rotate(2deg);
+    transform: translateZ(0) rotate(2deg);
   }
 
   85% {
-    transform: rotate(-1deg);
+    transform: translateZ(0) rotate(-1deg);
   }
 
   95% {
-    transform: rotate(0.5deg);
+    transform: translateZ(0) rotate(0.5deg);
   }
 
   100% {
-    transform: rotate(0deg);
+    transform: translateZ(0) rotate(0deg);
   }
 }
 
@@ -392,8 +392,11 @@ body {
   background-repeat: no-repeat;
   transform-style: preserve-3d;
   perspective: 1000px;
-  transform: rotateY(5deg) rotateX(3deg);
-  transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 1s ease-out;
+  transform: translateZ(0) rotateY(5deg) rotateX(3deg);
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.8s ease-out;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .section-box.returning-cradle-inverse {
@@ -417,20 +420,13 @@ body {
   transition: none !important;
 }
 
-.left-section.returning-cradle-inverse:hover {
-  transform: scale(2.5) rotateY(0deg) rotateX(0deg) !important;
+.left-section.returning-cradle-inverse:hover,
+.right-section.returning-cradle-inverse:hover {
+  transform: translateZ(0) scale(2.2) rotateY(0deg) rotateX(0deg) !important;
   transform-origin: left center !important;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5) !important;
   z-index: 35 !important;
-  transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out !important;
-}
-
-.right-section.returning-cradle-inverse:hover {
-  transform: scale(2.5) rotateY(0deg) rotateX(0deg) !important;
-  transform-origin: right center !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5) !important;
-  z-index: 35 !important;
-  transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out !important;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease-out !important;
 }
 
 .section-box.returning-cradle-inverse:hover {
@@ -455,15 +451,18 @@ body {
   top: -180px;
   z-index: 25;
   background-image: url('/images/recorridos_1.jpg');
-  transform: rotateY(-5deg) rotateX(3deg);
+  transform: translateZ(0) rotateY(-5deg) rotateX(3deg);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .left-section:hover {
-  transform: scale(2.5) rotateY(0deg) rotateX(0deg);
+  transform: translateZ(0) scale(2.2) rotateY(0deg) rotateX(0deg);
   transform-origin: left center;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0);
   z-index: 35;
-  transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease-out;
 }
 
 .right-section {
@@ -474,15 +473,18 @@ body {
   top: -180px;
   z-index: 25;
   background-image: url('/images/restaurante_1.jpg');
-  transform: rotateY(5deg) rotateX(3deg);
+  transform: translateZ(0) rotateY(5deg) rotateX(3deg);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .right-section:hover {
-  transform: scale(2.5) rotateY(0deg) rotateX(0deg);
+  transform: translateZ(0) scale(2.2) rotateY(0deg) rotateX(0deg);
   transform-origin: right center;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0);
   z-index: 35;
-  transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease-out;
 }
 
 .section-box.returning-position {
@@ -516,7 +518,7 @@ body {
 .left-section.returning-cradle:hover {
   transform: scale(2.5) rotateY(0deg) rotateX(0deg) !important;
   transform-origin: left center !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0) !important;
   z-index: 35 !important;
   transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out !important;
 }
@@ -525,7 +527,7 @@ body {
 .right-section.returning-cradle:hover {
   transform: scale(2.5) rotateY(0deg) rotateX(0deg) !important;
   transform-origin: right center !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0) !important;
   z-index: 35 !important;
   transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 1.5s ease-out !important;
 }
@@ -562,34 +564,121 @@ body {
   width: 100%;
   height: 100%;
   z-index: 30;
-  /* Z-index más alto que el recuadro */
   cursor: pointer;
 }
 
 .section-box header h2 {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+  color: var(--text-color);
+  font-size: 3.5rem;
+  margin-bottom: 8px;
+  margin-top: -15px;
   text-align: center;
+  font-family: var(--font-art-deco-6);
+  font-weight: 700;
+  letter-spacing: .3em;
 }
 
+/* Update paragraph styles for both section boxes */
 .section-box p {
   color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.5rem;
+  line-height: 1.8;
   text-align: center;
+  font-family: var(--font-retro-3);
 }
 
 .section-box strong {
-  color: var(--accent-color);
-  font-size: 1.1rem;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: -15px;
 }
 
+/* Versión Movil */
 @media (max-width: 768px) {
+
+  :root {
+    --logo-text-position: 30vh;
+    /* Posición del texto CUNA DE SABORES */
+    --section-top-gap: 15vh;
+    /* Reducido de 20vh a 15vh - Distancia entre el div superior y el texto */
+    --section-bottom-gap: 20vh;
+    /* Reducido de 20vh a 15vh - Distancia entre el texto y el div inferior */
+    --top-safe-area: env(safe-area-inset-top, 10px);
+    /* Espacio en la parte superior */
+  }
+
+  @keyframes moveRightMobile {
+    0% {
+      transform: translateX(0);
+    }
+
+    25% {
+      transform: translateX(20px);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+
+    75% {
+      transform: translateX(20px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes moveLeftMobile {
+    0% {
+      transform: translateX(0);
+    }
+
+    25% {
+      transform: translateX(-20px);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+
+    75% {
+      transform: translateX(-20px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .word-cuna {
+    animation: moveRightMobile 5s ease-in-out infinite;
+  }
+
+  .word-de {
+    animation: moveLeftMobile 5s ease-in-out infinite;
+  }
+
+  .word-sabores {
+    animation: moveRightMobile 5s ease-in-out infinite;
+  }
 
   body {
     overflow: auto;
-    /* Permitir scroll en dispositivos móviles */
+    padding-top: var(--top-safe-area);
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .container {
+    padding-top: 200px;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 
   .restaurant-badge {
@@ -613,10 +702,31 @@ body {
 
   .logo-background {
     font-size: clamp(3rem, 12vw, 8rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    position: absolute;
+    top: calc(var(--logo-text-position) + var(--top-safe-area));
+    left: 0;
+    right: 0;
+    transform: none;
+    z-index: 1;
+  }
+
+  .word {
+    margin: 0.05em 0;
   }
 
   .logo-illustration {
-    width: 80%;
+    width: 25%;
+    position: absolute;
+    top: calc(var(--logo-text-position) + 13vh + var(--top-safe-area));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 16;
+    opacity: 0.7;
   }
 
   .restaurant-tag {
@@ -631,30 +741,86 @@ body {
 
   .social-links {
     gap: 1rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
   }
 
   .main-sections {
     position: relative;
-    top: auto;
-    transform: none;
-    flex-direction: column;
-    margin-top: 40px;
-    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 0 20px;
   }
 
   .section-box {
-    width: 300px;
-    height: 280px;
-    margin: 15px 0;
+    width: 340px;
+    height: 350px;
+    margin: 0;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
   }
 
   .left-section,
   .right-section {
     margin-left: auto;
     margin-right: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+    z-index: 14;
+  }
+
+  .left-section {
+    top: calc(var(--logo-text-position) - var(--section-top-gap) - 280px + var(--top-safe-area));
+    /* Ajustado para considerar la barra de navegación */
+  }
+
+  .right-section {
+    top: calc(var(--logo-text-position) + var(--section-bottom-gap) + 10vh);
+    left: 50%;
+    transform: translateX(-50%) !important;
+  }
+
+
+  /* Ajustar el comportamiento de hover en móvil */
+  .left-section:hover,
+  .right-section:hover,
+  .section-box:hover {
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Ajustar tamaños de texto para móvil */
+  .section-box header h2 {
+    font-size: 2.2rem;
+    letter-spacing: 0.2em;
+  }
+
+  .section-box p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .section-box strong {
+    font-size: 1.3rem;
+  }
+
+  /* Mejorar la posición del contenedor del logo */
+  .logo-container {
+    margin-bottom: 0;
+    padding-top: calc(10px + var(--top-safe-area));
+    /* Ajustado para barras de navegación */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
   }
 }
