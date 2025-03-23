@@ -9,69 +9,217 @@
   <!-- First load main.css for variables and fonts -->
   <link rel="stylesheet" href="assets/css/main.css" />
   <!-- Then load portada.css which uses those variables -->
-  <link rel="stylesheet" href="assets/css/portada.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <body>
-  <div class="overlay-background"></div>
+  <!-- SECCIÓN: HEADER -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-header">
+        <img src="images/logoICO.ico" alt="CUNA DE SABORES Logo" />
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="/components/restaurante.html">Restaurante</a></li>
+          <li><a href="/components/reservar.html">Reservar</a></li>
+          <li><a href="/components/contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
   <div class="container">
-    <!-- Logo y título principal -->
-    <div class="logo-container">
-      <div class="logo-background">
-        <span class="word word-cuna">CUNA</span>
-        <span class="word word-de">DE</span>
-        <span class="word word-sabores">SABORES</span>
+    <!-- SECCIÓN: BIENVENIDA Y BUSCADOR -->
+    <section id="welcome-section">
+      <!-- Video de fondo solo para esta sección -->
+      <div class="welcome-video-background">
+        <video autoplay muted loop id="welcome-background-video">
+          <source src="videos/videoPortadaViñedo.mp4" type="video/mp4">
+          Tu navegador no soporta videos HTML5.
+        </video>
+        <div class="welcome-video-overlay"></div>
       </div>
-      <div class="logo-illustration">
-        <img src="images/logoPng-picaai.png" alt="CUNA DE SABORES Logo" />
-      </div>
-      <!-- Secciones principales -->
-      <div class="main-sections">
-        <!-- Sección izquierda: Recorridos -->
-        <div class="section-box left-section">
-          <a href="recorridos.html" class="section-link"></a>
-          <header>
-            <h2>Recorridos</h2>
-          </header>
-          <p>
-            <strong>Vive la aventura, descubre la tradición</strong>
-            <br />
-            Sumérgete en experiencias únicas.
-            <br />
-            Explora paisajes fascinantes y conecta con la esencia de nuestra
-            cultura.
-            <br />
-            ¿Listo para una aventura inolvidable?
-          </p>
-        </div>
-        <!-- Sección derecha: Restaurante -->
-        <div class="section-box right-section">
-          <a href="restaurante.html" class="section-link"></a>
-          <header>
-            <h2>Restaurante</h2>
-          </header>
-          <p>
-            <strong>Sabores que cuentan historias</strong>
-            <br />
-            Disfruta la auténtica gastronomía mexicana con ingredientes frescos,
-            recetas ancestrales y un ambiente que enamora. ¡Tu mesa te espera!
-            <br />
-          </p>
+      <h1 class="welcome-title welcome-title-outside fade-in">Bienvenidos a Cuna de Sabores</h1>
+      <p class="welcome-text welcome-text-outside fade-in">Descubre la auténtica experiencia gastronómica y cultural
+        mexicana.</p>
+      <div class="welcome-container">
+        <div class="search-container">
+          <form class="search-form" id="package-search-form" action="#" method="get">
+            <input type="text" class="search-input" id="package-search-input" placeholder="Buscar paquetes de viaje..."
+              aria-label="Buscar">
+            <button type="submit" class="search-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
-    </div>
-    <!-- Navegación -->
-    <nav class="main-nav"></nav>
-    <div class="social-links">
-      <a href="#" class="social-link"><img src="images/logotipo-de-instagram.png" alt="Instagram" /></a>
-      <a href="#" class="social-link"><img src="images/tik-tok.png" alt="TikTok" /></a>
-      <a href="#" class="social-link"><img src="images/facebook.png" alt="Facebook" /></a>
-    </div>
-    </nav>
+    </section>
+
+    <!-- SECCIÓN: HERO - OPCIONES PRINCIPALES -->
+    <section id="hero-section">
+
+      <!-- <div class="welcome-title slide-in">Descubre Nuestros Paquetes</div> -->
+
+      <!-- <div class="logo-container">
+        <div class="main-sections">
+          <div class="section-box left-section">
+            <a href="/components/recorridos.html" class="section-link"></a>
+            <header>
+              <h2>Recorridos</h2>
+            </header>
+            <p>
+              <strong>Vive la aventura, descubre la tradición</strong>
+              <br />
+              Sumérgete en experiencias únicas.
+              <br />
+              Explora paisajes fascinantes y conecta con la esencia de nuestra
+              cultura.
+              <br />
+              ¿Listo para una aventura inolvidable?
+            </p>
+          </div>
+          <div class="section-box right-section">
+            <a href="/components/restaurante.html" class="section-link"></a>
+            <header>
+              <h2>Restaurante</h2>
+            </header>
+            <p>
+              <strong>Sabores que cuentan historias</strong>
+              <br />
+              Disfruta la auténtica gastronomía mexicana con ingredientes frescos,
+              recetas ancestrales y un ambiente que enamora. ¡Tu mesa te espera!
+              <br />
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Nueva sección: Paquetes de Viaje -->
+      <div class="packages-section" id="packages-section">
+        <h2 class="packages-title slide-in">Nuestros Paquetes de Viaje</h2>
+        <div class="packages-container">
+          <!-- Paquete 1 -->
+          <div class="package-card" data-package-tags="cultural gastronómico tradicional">
+            <div class="package-image">
+              <img src="images/back.png" alt="Paquete Gastronómico">
+            </div>
+            <div class="package-content">
+              <h3>Experiencia Gastronómica</h3>
+              <p class="package-description">Descubre los sabores auténticos de la cocina mexicana con este recorrido
+                por los mejores restaurantes locales.</p>
+              <div class="package-details">
+                <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
+                <span class="package-price">$1,500 MXN</span>
+              </div>
+              <a href="/components/paquetes.html#gastronomico" class="package-button">Ver detalles</a>
+            </div>
+          </div>
+
+          <!-- Paquete 2 -->
+          <div class="package-card" data-package-tags="aventura naturaleza ecoturismo">
+            <div class="package-image">
+              <img src="images/back.png" alt="Paquete Aventura">
+            </div>
+            <div class="package-content">
+              <h3>Aventura en la Naturaleza</h3>
+              <p class="package-description">Explora paisajes impresionantes con actividades como senderismo, rappel y
+                observación de flora y fauna.</p>
+              <div class="package-details">
+                <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
+                <span class="package-price">$1,200 MXN</span>
+              </div>
+              <a href="/components/paquetes.html#aventura" class="package-button">Ver detalles</a>
+            </div>
+          </div>
+
+          <!-- Paquete 3 -->
+          <div class="package-card" data-package-tags="cultural histórico tradicional">
+            <div class="package-image">
+              <img src="images/back.png" alt="Paquete Cultural">
+            </div>
+            <div class="package-content">
+              <h3>Ruta Cultural</h3>
+              <p class="package-description">Visita museos, monumentos históricos y participa en talleres de artesanía
+                tradicional.</p>
+              <div class="package-details">
+                <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
+                <span class="package-price">$1,800 MXN</span>
+              </div>
+              <a href="/components/paquetes.html#cultural" class="package-button">Ver detalles</a>
+            </div>
+          </div>
+
+          <!-- Paquete 4 -->
+          <div class="package-card" data-package-tags="familiar relajación spa">
+            <div class="package-image">
+              <img src="images/back.png" alt="Paquete Familiar">
+            </div>
+            <div class="package-content">
+              <h3>Escapada Familiar</h3>
+              <p class="package-description">Actividades para toda la familia, incluyendo talleres para niños, visitas
+                guiadas y tiempo de relajación.</p>
+              <div class="package-details">
+                <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
+                <span class="package-price">$2,200 MXN</span>
+              </div>
+              <a href="/components/paquetes.html#familiar" class="package-button">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <div class="section-box fade-in">Contenido que aparecerá con fade</div> -->
+
+    <!-- SECCIÓN: GALERÍA -->
+    <section id="gallery-section">
+      <div class="logo-container gallery-wrapper">
+        <h2 class="gallery-title">Nuestra Galería</h2>
+        <div class="gallery-container">
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 1">
+          </div>
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 2">
+          </div>
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 3">
+          </div>
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 4">
+          </div>
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 5">
+          </div>
+          <div class="gallery-item">
+            <img src="images/back.png" alt="Imagen de galería 6">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: REDES SOCIALES -->
+    <section id="social-section">
+      <nav class="main-nav"></nav>
+      <div class="social-links">
+        <a href="#" class="social-link"><img src="images/logotipo-de-instagram.png" alt="Instagram" /></a>
+        <a href="#" class="social-link"><img src="images/tik-tok.png" alt="TikTok" /></a>
+        <a href="#" class="social-link"><img src="images/facebook.png" alt="Facebook" /></a>
+      </div>
+    </section>
   </div>
+
   <!-- Scripts -->
-  <script src="assets/js/section-animation.js"></script>
   <script src="assets/js/sound-player.js"></script>
+  <script src="assets/js/smooth-scroll.js"></script>
+  <script src="assets/js/package-search.js"></script>
+  <script src="assets/js/search-animation.js"></script>
 </body>
 
 </html>

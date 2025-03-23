@@ -1,0 +1,24 @@
+{
+  "name": "cunaoficial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "purge": "node purge-css.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dannjpz/cunaOficial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dannjpz/cunaOficial/issues"
+  },
+  "homepage": "https://github.com/Dannjpz/cunaOficial#readme",
+  "description": "",
+  "devDependencies": {
+    "purgecss": "^7.0.2"
+  }
+}
