@@ -20,6 +20,19 @@
       <div class="logo-header">
         <img src="images/logoICO.ico" alt="CUNA DE SABORES Logo" />
       </div>
+      <div class="search-container">
+        <form class="search-form" id="package-search-form" action="#" method="get">
+          <input type="text" class="search-input" id="package-search-input" placeholder="Buscar paquetes de viaje..."
+            aria-label="Buscar">
+          <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </form>
+      </div>
       <nav class="header-nav">
         <ul>
           <li><a href="/components/restaurante.html">Restaurante</a></li>
@@ -220,6 +233,8 @@
   <script src="assets/js/smooth-scroll.js"></script>
   <script src="assets/js/package-search.js"></script>
   <script src="assets/js/search-animation.js"></script>
+  <script src="assets/js/search-sync.js"></script>
+  <script src="assets/js/header-search-visibility.js"></script>
 </body>
 
 </html>

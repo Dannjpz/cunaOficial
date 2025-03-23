@@ -90,6 +90,8 @@ body {
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  /* Añadido position relative */
 }
 
 .logo-header {
@@ -97,7 +99,10 @@ body {
   align-items: center;
   justify-content: center;
   margin-left: -100px;
+  z-index: 10;
+  /* Asegura que esté por encima del buscador */
 }
+
 
 .logo-header img {
   width: 180px;
@@ -114,8 +119,9 @@ body {
   align-items: center;
   margin-left: auto;
   margin-right: -400px;
-  /* Cambiado de -150px a -100px para mover los botones más a la derecha */
   padding-right: 0;
+  z-index: 10;
+  /* Asegura que esté por encima del buscador */
 }
 
 
@@ -1095,6 +1101,33 @@ body {
   background-color: var(--secondary-color);
 }
 
+.header-container .search-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  z-index: 5;
+}
+
+.header-container .search-form {
+  width: 100%;
+}
+
+/* Aseguramos que el buscador del welcome-section mantenga su estilo */
+#welcome-section .search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 90%;
+  position: relative;
+  z-index: 40;
+}
+
+@media (max-width: 992px) {
+  .header-container .search-container {
+    width: 300px;
+  }
+}
+
 /* Versión Movil */
 @media (max-width: 768px) {
 
@@ -1183,11 +1216,23 @@ body {
 
   .header-container {
     flex-direction: column;
-    padding: 0.5rem 1rem;
+    padding: 10px;
+  }
+
+  .header-container .search-container {
+    position: relative;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 10px 0;
   }
 
   .logo-header {
-    margin-bottom: 0.5rem;
+    margin-left: 0;
+  }
+
+  .header-nav {
+    margin-right: 0;
   }
 
   .header-nav ul {
