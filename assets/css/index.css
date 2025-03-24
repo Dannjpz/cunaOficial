@@ -657,7 +657,8 @@ input[type="number"]::-webkit-outer-spin-button {
   max-width: 800px;
   margin: 0 auto;
   margin-top: 250px;
-  margin-left: 20%;
+  margin-left: 23.5%;
+  /* Cambiado de 20% a 40% para moverlo más a la derecha */
   background-color: transparent;
   border-radius: 15px;
   padding: 40px;
@@ -718,7 +719,7 @@ input[type="number"]::-webkit-outer-spin-button {
   position: absolute;
   top: 40%;
   left: 0;
-  right: 20%;
+  right: 25%;
   margin: 0 auto;
   z-index: 40;
   color: var(--text-color-primary);
