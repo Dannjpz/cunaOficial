@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Elementos del DOM
-    const searchForm = document.getElementById('package-search-form');
-    const searchInput = document.getElementById('package-search-input');
+    // Elementos del DOM - Actualizados para coincidir con los IDs en el HTML
+    const headerSearchForm = document.getElementById('package-search-form-header');
+    const welcomeSearchForm = document.getElementById('package-search-form-welcome');
+    const headerSearchInput = document.getElementById('package-search-input-header');
+    const welcomeSearchInput = document.getElementById('package-search-input-welcome');
     const packagesSection = document.getElementById('packages-section');
     const packageCards = document.querySelectorAll('.package-card');
 
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (searchTerm === '') {
             packageCards.forEach(card => {
                 card.style.display = 'block';
+                card.classList.remove('highlight');
             });
             return;
         }
@@ -26,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // Verificar si el término de búsqueda está en el título, descripción o etiquetas
             if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
                 card.style.display = 'block';
-                // Resaltar coincidencias (opcional)
-                highlightMatches(card, searchTerm);
+                card.classList.add('highlight');
             } else {
                 card.style.display = 'none';
+                card.classList.remove('highlight');
             }
         });
 
@@ -37,20 +40,31 @@ document.addEventListener('DOMContentLoaded', function () {
         packagesSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Función para resaltar coincidencias (opcional)
-    function highlightMatches(card, searchTerm) {
-        // Esta función podría implementarse para resaltar el texto que coincide con la búsqueda
-        // Por simplicidad, no la implementamos completamente aquí
+    // Eventos de envío de los formularios de búsqueda
+    if (headerSearchForm) {
+        headerSearchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            filterPackages(headerSearchInput.value);
+        });
     }
 
-    // Evento de envío del formulario de búsqueda
-    searchForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        filterPackages(searchInput.value);
-    });
+    if (welcomeSearchForm) {
+        welcomeSearchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            filterPackages(welcomeSearchInput.value);
+        });
+    }
 
-    // Evento de entrada en el campo de búsqueda (búsqueda en tiempo real)
-    searchInput.addEventListener('input', function () {
-        filterPackages(this.value);
-    });
+    // Eventos de entrada en los campos de búsqueda (búsqueda en tiempo real)
+    if (headerSearchInput) {
+        headerSearchInput.addEventListener('input', function () {
+            filterPackages(this.value);
+        });
+    }
+
+    if (welcomeSearchInput) {
+        welcomeSearchInput.addEventListener('input', function () {
+            filterPackages(this.value);
+        });
+    }
 });

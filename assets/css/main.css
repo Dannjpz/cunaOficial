@@ -26,15 +26,19 @@
   --color4: #235789;
   --color5: #637450;
   --font-efco: 'EFCO Brookshire', sans-serif;
-  --font-sans: 'Montserrat', sans-serif; /* Textos y parrafos */
+  --font-sans: 'Montserrat', sans-serif;
+  /* Textos y parrafos */
   --font-modern: 'Poppins', sans-serif;
-  --font-serif: 'Playfair Display', serif; /* Usar en titulos */
+  --font-serif: 'Playfair Display', serif;
+  /* Usar en titulos */
   --font-display: 'Cormorant Garamond', serif;
   --font-vintage-1: 'Abril Fatface', cursive;
   --font-vintage-2: 'Libre Baskerville', serif;
   --font-vintage-3: 'Old Standard TT', serif;
-  --font-vintage-4: 'Cinzel', serif; /* Usar en titulos */
-  --font-vintage-5: 'Lora', serif; /* Textos y parrafos */
+  --font-vintage-4: 'Cinzel', serif;
+  /* Usar en titulos */
+  --font-vintage-5: 'Lora', serif;
+  /* Textos y parrafos */
   --font-vintage-6: 'Crimson Text', serif;
   --font-vintage-7: 'IM Fell English', serif;
   --font-vintage-8: 'Spectral', serif;

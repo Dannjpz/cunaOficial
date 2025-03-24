@@ -21,9 +21,38 @@
         <img src="images/logoICO.ico" alt="CUNA DE SABORES Logo" />
       </div>
       <div class="search-container">
-        <form class="search-form" id="package-search-form" action="#" method="get">
-          <input type="text" class="search-input" id="package-search-input" placeholder="Buscar paquetes de viaje..."
-            aria-label="Buscar">
+        <form class="search-form" id="package-search-form-header" action="#" method="get">
+          <div class="search-sections">
+            <div class="search-section active" data-section="¿a donde vamos?">
+              <input type="text" class="search-input" id="package-search-input-header"
+                placeholder="Buscar experiencias gastronómicas..." aria-label="Buscar">
+            </div>
+            <div class="search-section" data-section="¿cuando?">
+              <input type="date" class="search-date" id="start-date-header" placeholder="Fecha inicio">
+              <span class="date-separator">-</span>
+              <input type="date" class="search-date" id="end-date-header" placeholder="Fecha final">
+            </div>
+            <div class="search-section" data-section="personas">
+              <input type="text" class="search-guests" id="guests-count-welcome" placeholder="Invitados" readonly
+                value="2">
+              <div class="guests-dropdown" id="guests-dropdown-welcome">
+                <!-- Las opciones se generarán dinámicamente con JavaScript -->
+              </div>
+            </div>
+          </div>
+          <div class="search-nav">
+            <button type="button" class="section-nav prev" aria-label="Sección anterior">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="section-indicators">
+              <span class="indicator active" data-section="¿a donde vamos?"></span>
+              <span class="indicator" data-section="¿cuando?"></span>
+              <span class="indicator" data-section="personas"></span>
+            </div>
+            <button type="button" class="section-nav next" aria-label="Siguiente sección">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
           <button type="submit" class="search-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,9 +89,38 @@
         mexicana.</p>
       <div class="welcome-container">
         <div class="search-container">
-          <form class="search-form" id="package-search-form" action="#" method="get">
-            <input type="text" class="search-input" id="package-search-input" placeholder="Buscar paquetes de viaje..."
-              aria-label="Buscar">
+          <form class="search-form" id="package-search-form-welcome" action="#" method="get">
+            <div class="search-sections">
+              <div class="search-section active" data-section="¿a donde vamos?">
+                <input type="text" class="search-input" id="package-search-input-welcome"
+                  placeholder="Buscar experiencias gastronómicas..." aria-label="Buscar">
+              </div>
+              <div class="search-section" data-section="¿cuando?">
+                <input type="date" class="search-date" id="start-date-welcome" placeholder="Fecha inicio">
+                <span class="date-separator">-</span>
+                <input type="date" class="search-date" id="end-date-welcome" placeholder="Fecha final">
+              </div>
+              <div class="search-section" data-section="personas">
+                <input type="text" class="search-guests" id="guests-count-header" placeholder="Invitados" readonly
+                  value="2">
+                <div class="guests-dropdown" id="guests-dropdown-header">
+                  <!-- Las opciones se generarán dinámicamente con JavaScript -->
+                </div>
+              </div>
+            </div>
+            <div class="search-nav">
+              <button type="button" class="section-nav prev" aria-label="Sección anterior">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="section-indicators">
+                <span class="indicator active" data-section="¿a donde vamos?"></span>
+                <span class="indicator" data-section="¿cuando?"></span>
+                <span class="indicator" data-section="personas"></span>
+              </div>
+              <button type="button" class="section-nav next" aria-label="Siguiente sección">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
             <button type="submit" class="search-button">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -235,6 +293,9 @@
   <script src="assets/js/recorridos/search-animation.js"></script>
   <script src="assets/js/recorridos/search-sync.js"></script>
   <script src="assets/js/recorridos/header-search-visibility.js"></script>
+  <script src="assets/js/recorridos/search-sections.js"></script>
+  <script src="assets/js/recorridos/guests-dropdown.js"></script>
+  <script src="assets/js/recorridos/date-picker.js"></script>
 </body>
 
 </html>
