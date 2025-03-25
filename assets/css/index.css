@@ -1669,6 +1669,19 @@ input[type="number"]::-webkit-outer-spin-button {
   /* Mantenemos la separación entre caracteres */
 }
 
+.search-button.reset-mode {
+  background: rgba(255, 100, 100, 0.2);
+  transition: all 0.3s ease;
+}
+
+.search-button.reset-mode:hover {
+  background: rgba(255, 100, 100, 0.3);
+}
+
+.search-button.reset-mode svg {
+  stroke: #ff6b6b;
+}
+
 @media (max-width: 992px) {
   .header-container .search-container {
     width: 85vw;
