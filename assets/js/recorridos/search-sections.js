@@ -17,38 +17,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = form.querySelector('.search-input');
     if (searchInput) {
       // Añadir evento de input para búsqueda en tiempo real
-      searchInput.addEventListener('input', function() {
+      searchInput.addEventListener('input', function () {
         const query = this.value.trim();
-        
+
         // Recopilar datos del formulario
         const formData = {
           query: query,
           dateFilterActive: false,
           guestsFilterActive: false
         };
-        
+
         // Verificar si hay fechas seleccionadas
         const startDateInput = form.querySelector('[id^="start-date"]');
         const endDateInput = form.querySelector('[id^="end-date"]');
-        if (startDateInput && startDateInput.dataset.userInteracted === 'true' && 
-            endDateInput && endDateInput.dataset.userInteracted === 'true') {
+        if (startDateInput && startDateInput.dataset.userInteracted === 'true' &&
+          endDateInput && endDateInput.dataset.userInteracted === 'true') {
           formData.dateFilterActive = true;
           formData.startDate = startDateInput.value;
           formData.endDate = endDateInput.value;
         }
-        
+
         // Verificar si hay huéspedes seleccionados
         const guestsInput = form.querySelector('[id^="guests-count"]');
         if (guestsInput && guestsInput.dataset.userInteracted === 'true') {
           formData.guestsFilterActive = true;
           formData.guests = guestsInput.value;
         }
-        
+
         // Realizar la búsqueda en tiempo real
         if (typeof window.performAdvancedSearch === 'function') {
           window.performAdvancedSearch(formData);
         }
-        
+
         // Mientras se está escribiendo, mantener el botón en modo búsqueda
         const searchButton = form.querySelector('.search-button');
         if (searchButton) {
@@ -64,12 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
           searchButton.setAttribute('title', 'Buscar');
         }
       });
-      
+
       // Añadir evento de blur (cuando el usuario quita el foco del campo)
-      searchInput.addEventListener('blur', function() {
+      searchInput.addEventListener('blur', function () {
         const query = this.value.trim();
         const searchButton = form.querySelector('.search-button');
-        
+
         if (searchButton && query.length > 0) {
           // Si hay texto en el campo cuando se quita el foco, cambiar a modo reset
           searchButton.classList.add('reset-mode');
@@ -97,17 +97,29 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       // Desactivar todos los indicadores
-      indicators.forEach(indicator => {
-        indicator.classList.remove('active');
-      });
+      if (indicators && indicators.length > 0) {
+        indicators.forEach(indicator => {
+          if (indicator) {
+            indicator.classList.remove('active');
+          }
+        });
+      }
 
       // Mostrar la sección actual
       sections[index].classList.add('active');
-      indicators[index].classList.add('active');
+      
+      // Activar el indicador correspondiente si existe
+      if (indicators && indicators.length > index && indicators[index]) {
+        indicators[index].classList.add('active');
+      }
 
       // Actualizar el estado de los botones de navegación
-      prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-      nextBtn.style.visibility = index === sections.length - 1 ? 'hidden' : 'visible';
+      if (prevBtn) {
+        prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
+      }
+      if (nextBtn) {
+        nextBtn.style.visibility = index === sections.length - 1 ? 'hidden' : 'visible';
+      }
 
       currentSection = index;
     }
@@ -228,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Obtener la fecha actual para la fecha inicial
           const today = new Date();
           const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-          
+
           // Obtener el 7 de diciembre del año en curso para la fecha final
           const endOfYear = new Date();
           endOfYear.setMonth(11); // Diciembre (0-indexed)
@@ -442,23 +454,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // También marcar como interactuado cuando se selecciona un valor del dropdown
-  const dropdown = document.querySelector(`#guests-dropdown-${guestsInput.id.includes('header') ? 'header' : 'welcome'}`);
-  if (dropdown) {
-    dropdown.addEventListener('click', function (e) {
-      if (e.target.classList.contains('guest-option')) {
-        guestsInput.dataset.userInteracted = 'true';
-        // Sincronizar con el otro formulario
-        const isHeader = guestsInput.id.includes('header');
-        const correspondingId = isHeader ?
-          guestsInput.id.replace('header', 'welcome') :
-          guestsInput.id.replace('welcome', 'header');
+  // Fix for the guestsInput reference error
+  // We need to handle the dropdown events for both forms separately
+  document.querySelectorAll('.search-form').forEach(form => {
+    const guestsInput = form.querySelector('[id^="guests-count"]');
+    if (guestsInput) {
+      // Determine which dropdown to use based on the input ID
+      const dropdownId = `guests-dropdown-${guestsInput.id.includes('header') ? 'header' : 'welcome'}`;
+      const dropdown = document.getElementById(dropdownId);
+      
+      if (dropdown) {
+        dropdown.addEventListener('click', function (e) {
+          if (e.target.classList.contains('guest-option')) {
+            guestsInput.dataset.userInteracted = 'true';
+            
+            // Sincronizar con el otro formulario
+            const isHeader = guestsInput.id.includes('header');
+            const correspondingId = isHeader ?
+              guestsInput.id.replace('header', 'welcome') :
+              guestsInput.id.replace('welcome', 'header');
 
-        const correspondingInput = document.getElementById(correspondingId);
-        if (correspondingInput) {
-          correspondingInput.dataset.userInteracted = 'true';
-        }
+            const correspondingInput = document.getElementById(correspondingId);
+            if (correspondingInput) {
+              correspondingInput.dataset.userInteracted = 'true';
+            }
+          }
+        });
       }
-    });
-  }
+    }
+  });
 });
