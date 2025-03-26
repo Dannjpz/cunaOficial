@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <!-- Then load portada.css which uses those variables -->
   <link rel="stylesheet" href="assets/css/index.css" />
+  <!-- Añadir el nuevo CSS para las secciones deslizantes -->
+  <link rel="stylesheet" href="assets/css/sections.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -142,214 +144,368 @@
 
       <!-- <div class="welcome-title slide-in">Descubre Nuestros Paquetes</div> -->
 
-      <!-- <div class="logo-container">
-        <div class="main-sections">
-          <div class="section-box left-section">
-            <a href="/components/recorridos.html" class="section-link"></a>
-            <header>
-              <h2>Recorridos</h2>
-            </header>
-            <p>
-              <strong>Vive la aventura, descubre la tradición</strong>
-              <br />
-              Sumérgete en experiencias únicas.
-              <br />
-              Explora paisajes fascinantes y conecta con la esencia de nuestra
-              cultura.
-              <br />
-              ¿Listo para una aventura inolvidable?
-            </p>
-          </div>
-          <div class="section-box right-section">
-            <a href="/components/restaurante.html" class="section-link"></a>
-            <header>
-              <h2>Restaurante</h2>
-            </header>
-            <p>
-              <strong>Sabores que cuentan historias</strong>
-              <br />
-              Disfruta la auténtica gastronomía mexicana con ingredientes frescos,
-              recetas ancestrales y un ambiente que enamora. ¡Tu mesa te espera!
-              <br />
-            </p>
-          </div>
-        </div>
-      </div> -->
-
       <!-- Nueva sección: Paquetes de Viaje -->
-      <div class="packages-section" id="packages-section">
-        <h2 class="packages-title slide-in">Nuestros Paquetes de Viaje</h2>
-
-        <!-- Mensaje de no resultados -->
-        <div id="no-results-message"
-          style="display: none; text-align: center; padding: 20px; margin: 20px auto; max-width: 600px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-          <i class="fas fa-search" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
-          <h3>No se encontraron paquetes</h3>
-          <p>No hay paquetes disponibles que coincidan con tus criterios de búsqueda. Por favor, intenta con otras
-            fechas o criterios.</p>
+      <div class="cont s--inactive">
+        <div class="welcome-title slide-in">Descubre Nuestros Paquetes</div>
+        
+        <!-- Botones de navegación -->
+        <div class="packages-navigation">
+          <button class="nav-btn prev-btn" aria-label="Paquetes anteriores">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="packages-counter">
+            <span id="current-package-group">1</span>/<span id="total-package-groups">2</span>
+          </div>
+          <button class="nav-btn next-btn" aria-label="Paquetes siguientes">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
-
-        <div class="packages-container">
+        
+        <div class="cont__inner">
           <!-- Paquete 1 -->
-          <div class="package-card" data-package-tags="cultural gastronómico tradicional"
-            data-departure-dates="2025-12-10" data-max-guests="10" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Gastronómico">
-            </div>
-            <div class="package-content">
-              <h3>Experiencia Gastronómica</h3>
-              <p class="package-description">Descubre los sabores auténticos de la cocina mexicana con este recorrido
-                por los mejores restaurantes locales.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
-                <span class="package-price">$1,500 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 10 Dic</span>
+          <div class="el" data-package-tags="cultural gastronómico tradicional" data-departure-dates="2025-12-10"
+            data-max-guests="10" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Experiencia Gastronómica</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Experiencia Gastronómica</h3>
+                    <p>Descubre los sabores auténticos de la cocina mexicana con este recorrido
+                      por los mejores restaurantes locales.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
+                      <span class="package-price">$1,500 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 10 Dic</span>
+                    </div>
+                    <a href="/components/paquetes.html#gastronomico" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#gastronomico" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">1</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="1">1</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 2 -->
-          <div class="package-card" data-package-tags="aventura naturaleza ecoturismo" data-departure-dates="2025-12-08"
+          <div class="el" data-package-tags="aventura naturaleza ecoturismo" data-departure-dates="2025-12-08"
             data-max-guests="8" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Aventura">
-            </div>
-            <div class="package-content">
-              <h3>Aventura en la Naturaleza</h3>
-              <p class="package-description">Explora paisajes impresionantes con actividades como senderismo, rappel y
-                observación de flora y fauna.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
-                <span class="package-price">$1,200 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 8 Dic</span>
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Aventura en la Naturaleza</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Aventura en la Naturaleza</h3>
+                    <p>Explora paisajes impresionantes con actividades como senderismo, rappel y
+                      observación de flora y fauna.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
+                      <span class="package-price">$1,200 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 8 Dic</span>
+                    </div>
+                    <a href="/components/paquetes.html#aventura" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#aventura" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">2</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="2">2</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 3 -->
-          <div class="package-card" data-package-tags="cultural histórico tradicional" data-departure-dates="2025-06-15"
+          <div class="el" data-package-tags="cultural histórico tradicional" data-departure-dates="2025-06-15"
             data-max-guests="15" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Cultural">
-            </div>
-            <div class="package-content">
-              <h3>Ruta Cultural</h3>
-              <p class="package-description">Visita museos, monumentos históricos y participa en talleres de artesanía
-                tradicional.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
-                <span class="package-price">$1,800 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-15 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 15 jun</span>
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Ruta Cultural</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Ruta Cultural</h3>
+                    <p>Visita museos, monumentos históricos y participa en talleres de artesanía
+                      tradicional.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
+                      <span class="package-price">$1,800 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-15 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 15 jun</span>
+                    </div>
+                    <a href="/components/paquetes.html#cultural" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#cultural" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">3</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="3">3</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 4 -->
-          <div class="package-card" data-package-tags="familiar relajación spa" data-departure-dates="2025-07-05"
+          <div class="el" data-package-tags="familiar relajación spa" data-departure-dates="2025-07-05"
             data-max-guests="12" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Familiar">
-            </div>
-            <div class="package-content">
-              <h3>Escapada Familiar</h3>
-              <p class="package-description">Actividades para toda la familia, incluyendo talleres para niños, visitas
-                guiadas y tiempo de relajación.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
-                <span class="package-price">$2,200 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 5 jul</span>
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Escapada Familiar</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Escapada Familiar</h3>
+                    <p>Actividades para toda la familia, incluyendo talleres para niños, visitas
+                      guiadas y tiempo de relajación.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
+                      <span class="package-price">$2,200 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 5 jul</span>
+                    </div>
+                    <a href="/components/paquetes.html#familiar" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#familiar" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">4</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="4">4</div>
+              </div>
             </div>
           </div>
 
-          <!-- Paquete 5 (NUEVO) -->
-          <div class="package-card" data-package-tags="viñedos enología gastronómico" data-departure-dates="2025-11-18"
+          <!-- Paquete 5 -->
+          <div class="el" data-package-tags="viñedos enología gastronómico" data-departure-dates="2025-11-18"
             data-max-guests="10" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Viñedos">
-            </div>
-            <div class="package-content">
-              <h3>Ruta de Viñedos</h3>
-              <p class="package-description">Recorre los mejores viñedos de la región, aprende sobre el proceso de
-                elaboración del vino y disfruta de catas exclusivas.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
-                <span class="package-price">$1,800 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 18 nov</span>
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Ruta de Viñedos</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Ruta de Viñedos</h3>
+                    <p>Recorre los mejores viñedos de la región, aprende sobre el proceso de
+                      elaboración del vino y disfruta de catas exclusivas.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
+                      <span class="package-price">$1,800 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 18 nov</span>
+                    </div>
+                    <a href="/components/paquetes.html#vinedos" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#vinedos" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">5</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="5">5</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 6 (NUEVO) -->
-          <div class="package-card" data-package-tags="talleres culinarios gastronómico tradicional"
-            data-departure-dates="2025-02-22" data-max-guests="8" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Talleres Culinarios">
-            </div>
-            <div class="package-content">
-              <h3>Talleres Culinarios</h3>
-              <p class="package-description">Aprende a preparar platillos tradicionales mexicanos de la mano de chefs
-                expertos en cocina regional.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 1 día</span>
-                <span class="package-price">$950 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 22 Feb</span>
+          <div class="el" data-package-tags="talleres culinarios gastronómico tradicional" data-departure-dates="2025-02-22"
+            data-max-guests="8" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Talleres Culinarios</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Talleres Culinarios</h3>
+                    <p>Aprende a preparar platillos tradicionales mexicanos de la mano de chefs expertos en cocina regional.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 1 día</span>
+                      <span class="package-price">$950 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 22 Feb</span>
+                    </div>
+                    <a href="/components/paquetes.html#talleres" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#talleres" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">6</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="6">6</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 7 (NUEVO) -->
-          <div class="package-card" data-package-tags="recorridos históricos cultural tradicional"
-            data-departure-dates="2025-01-30" data-max-guests="20" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Recorridos Históricos">
-            </div>
-            <div class="package-content">
-              <h3>Recorridos Históricos</h3>
-              <p class="package-description">Explora la rica historia de México a través de visitas guiadas a sitios
-                arqueológicos, pueblos mágicos y centros históricos.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 5 días</span>
-                <span class="package-price">$2,500 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-20 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 30 Ene</span>
+          <div class="el" data-package-tags="recorridos históricos cultural tradicional" data-departure-dates="2025-01-30"
+            data-max-guests="20" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Recorridos Históricos</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Recorridos Históricos</h3>
+                    <p>Explora la rica historia de México a través de visitas guiadas a sitios arqueológicos, pueblos mágicos y centros históricos.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 5 días</span>
+                      <span class="package-price">$2,500 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-20 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 30 Ene</span>
+                    </div>
+                    <a href="/components/paquetes.html#historicos" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#historicos" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">7</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="7">7</div>
+              </div>
             </div>
           </div>
 
           <!-- Paquete 8 (NUEVO) -->
-          <div class="package-card" data-package-tags="gastronomía mexicana tradicional regional"
-            data-departure-dates="2025-09-09" data-max-guests="12" data-min-guests="1">
-            <div class="package-image">
-              <img src="images/back.png" alt="Paquete Gastronomía Regional">
-            </div>
-            <div class="package-content">
-              <h3>Gastronomía Regional</h3>
-              <p class="package-description">Un viaje por los sabores más representativos de las diferentes regiones de
-                México, desde Yucatán hasta Baja California.</p>
-              <div class="package-details">
-                <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
-                <span class="package-price">$2,100 MXN</span>
-                <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
-                <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 09 sep</span>
+          <div class="el" data-package-tags="gastronomía mexicana tradicional regional" data-departure-dates="2025-09-09"
+            data-max-guests="12" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Gastronomía Regional</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Gastronomía Regional</h3>
+                    <p>Un viaje por los sabores más representativos de las diferentes regiones de México, desde Yucatán hasta Baja California.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
+                      <span class="package-price">$2,100 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 09 Sep</span>
+                    </div>
+                    <a href="/components/paquetes.html#regional" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
               </div>
-              <a href="/components/paquetes.html#regional" class="package-button">Ver detalles</a>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">8</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="8">8</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paquete 9 (NUEVO) -->
+          <div class="el" data-package-tags="mercados locales artesanías tradicional" data-departure-dates="2025-08-15"
+            data-max-guests="15" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Mercados y Artesanías</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Mercados y Artesanías</h3>
+                    <p>Visita los mercados tradicionales más coloridos y conoce a los artesanos locales que mantienen vivas las técnicas ancestrales.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
+                      <span class="package-price">$1,750 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-15 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 15 Ago</span>
+                    </div>
+                    <a href="/components/paquetes.html#mercados" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">9</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="9">9</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paquete 10 (NUEVO) -->
+          <div class="el" data-package-tags="festivales tradiciones cultural" data-departure-dates="2025-10-25"
+            data-max-guests="25" data-min-guests="1">
+            <div class="el__overflow">
+              <div class="el__inner">
+                <div class="el__bg"></div>
+                <div class="el__preview-cont">
+                  <h2 class="el__heading">Festivales y Tradiciones</h2>
+                </div>
+                <div class="el__content">
+                  <div class="el__text">
+                    <h3>Festivales y Tradiciones</h3>
+                    <p>Participa en las celebraciones más emblemáticas de México, como el Día de Muertos, la Guelaguetza o el Carnaval.</p>
+                    <div class="package-details">
+                      <span class="package-duration"><i class="fas fa-clock"></i> 5 días</span>
+                      <span class="package-price">$2,800 MXN</span>
+                      <span class="package-availability"><i class="fas fa-users"></i> 1-25 personas</span>
+                      <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 25 Oct</span>
+                    </div>
+                    <a href="/components/paquetes.html#festivales" class="package-button">Ver detalles</a>
+                  </div>
+                  <div class="el__close-btn"></div>
+                </div>
+              </div>
+            </div>
+            <div class="el__index">
+              <div class="el__index-back">10</div>
+              <div class="el__index-front">
+                <div class="el__index-overlay" data-index="10">10</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Mensaje de no resultados (mantener para el buscador) -->
+      <div id="no-results-message"
+        style="display: none; text-align: center; padding: 20px; margin: 20px auto; max-width: 600px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <i class="fas fa-search" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
+        <h3>No se encontraron paquetes</h3>
+        <p>No hay paquetes disponibles que coincidan con tus criterios de búsqueda. Por favor, intenta con otras
+          fechas o criterios.</p>
       </div>
     </section>
     <!-- <div class="section-box fade-in">Contenido que aparecerá con fade</div> -->
@@ -402,6 +558,10 @@
   <script src="assets/js/recorridos/search-sections.js"></script>
   <script src="assets/js/recorridos/guests-dropdown.js"></script>
   <script src="assets/js/recorridos/date-picker.js"></script>
+  <script src="assets/js/recorridos/sections-slider.js"></script>
+  <script src="assets/js/recorridos/price-calculator.js"></script>
+  <script src="assets/js/recorridos/search-improvements.js"></script>
+
 </body>
 
 </html>

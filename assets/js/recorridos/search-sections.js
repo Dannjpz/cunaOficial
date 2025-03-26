@@ -13,6 +13,78 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log(`Formulario ${formIndex + 1}: ${sections.length} secciones, ${indicators.length} indicadores`);
 
+    // Obtener el input de búsqueda
+    const searchInput = form.querySelector('.search-input');
+    if (searchInput) {
+      // Añadir evento de input para búsqueda en tiempo real
+      searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        
+        // Recopilar datos del formulario
+        const formData = {
+          query: query,
+          dateFilterActive: false,
+          guestsFilterActive: false
+        };
+        
+        // Verificar si hay fechas seleccionadas
+        const startDateInput = form.querySelector('[id^="start-date"]');
+        const endDateInput = form.querySelector('[id^="end-date"]');
+        if (startDateInput && startDateInput.dataset.userInteracted === 'true' && 
+            endDateInput && endDateInput.dataset.userInteracted === 'true') {
+          formData.dateFilterActive = true;
+          formData.startDate = startDateInput.value;
+          formData.endDate = endDateInput.value;
+        }
+        
+        // Verificar si hay huéspedes seleccionados
+        const guestsInput = form.querySelector('[id^="guests-count"]');
+        if (guestsInput && guestsInput.dataset.userInteracted === 'true') {
+          formData.guestsFilterActive = true;
+          formData.guests = guestsInput.value;
+        }
+        
+        // Realizar la búsqueda en tiempo real
+        if (typeof window.performAdvancedSearch === 'function') {
+          window.performAdvancedSearch(formData);
+        }
+        
+        // Mientras se está escribiendo, mantener el botón en modo búsqueda
+        const searchButton = form.querySelector('.search-button');
+        if (searchButton) {
+          // Siempre mostrar como botón de búsqueda mientras se escribe
+          searchButton.classList.remove('reset-mode');
+          searchButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          `;
+          searchButton.setAttribute('title', 'Buscar');
+        }
+      });
+      
+      // Añadir evento de blur (cuando el usuario quita el foco del campo)
+      searchInput.addEventListener('blur', function() {
+        const query = this.value.trim();
+        const searchButton = form.querySelector('.search-button');
+        
+        if (searchButton && query.length > 0) {
+          // Si hay texto en el campo cuando se quita el foco, cambiar a modo reset
+          searchButton.classList.add('reset-mode');
+          searchButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          `;
+          searchButton.setAttribute('title', 'Limpiar filtros');
+        }
+      });
+    }
+
     let currentSection = 0;
 
     // Función para mostrar una sección específica
@@ -128,22 +200,133 @@ document.addEventListener('DOMContentLoaded', function () {
       // Realizar la búsqueda con los datos completos
       performAdvancedSearch(formData);
 
-      // Cambiar el botón de búsqueda a botón de reset
-      const searchButton = form.querySelector('.search-button');
-      if (searchButton) {
-        searchButton.classList.add('reset-mode');
-        // Cambiar el ícono de lupa por un ícono de X
-        searchButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          `;
-        // Cambiar el título del botón
-        searchButton.setAttribute('title', 'Limpiar filtros');
+      // Quitar el foco del input para activar el evento blur
+      const searchInput = form.querySelector('.search-input');
+      if (searchInput) {
+        searchInput.blur();
       }
     });
+  });
+
+  // Añadir evento de clic para el botón de reset
+  document.querySelectorAll('.search-form').forEach(form => {
+    const searchButton = form.querySelector('.search-button');
+    if (searchButton) {
+      searchButton.addEventListener('click', function (e) {
+        // Solo actuar como reset si está en modo reset
+        if (this.classList.contains('reset-mode')) {
+          e.preventDefault(); // Prevenir el envío del formulario
+
+          // Restablecer todos los campos del formulario
+          const searchInput = form.querySelector('.search-input');
+          const startDateInput = form.querySelector('[id^="start-date"]');
+          const endDateInput = form.querySelector('[id^="end-date"]');
+          const guestsInput = form.querySelector('[id^="guests-count"]');
+
+          if (searchInput) searchInput.value = '';
+
+          // Obtener la fecha actual para la fecha inicial
+          const today = new Date();
+          const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+          
+          // Obtener el 7 de diciembre del año en curso para la fecha final
+          const endOfYear = new Date();
+          endOfYear.setMonth(11); // Diciembre (0-indexed)
+          endOfYear.setDate(7);   // Día 7
+          const formattedEndOfYear = `${endOfYear.getFullYear()}-12-07`;
+
+          // Restaurar fechas a los valores correctos
+          if (startDateInput) {
+            startDateInput.value = formattedToday;
+            startDateInput.dataset.userInteracted = 'false';
+          }
+
+          if (endDateInput) {
+            endDateInput.value = formattedEndOfYear;
+            endDateInput.dataset.userInteracted = 'false';
+          }
+
+          if (guestsInput) {
+            guestsInput.value = guestsInput.getAttribute('data-default-value') || '2'; // Valor por defecto
+            guestsInput.dataset.userInteracted = 'false';
+          }
+
+          // Sincronizar los campos entre formularios
+          if (form.id === 'package-search-form-header') {
+            const welcomeForm = document.getElementById('package-search-form-welcome');
+            if (welcomeForm) {
+              const welcomeSearchInput = welcomeForm.querySelector('.search-input');
+              const welcomeStartDateInput = welcomeForm.querySelector('[id^="start-date"]');
+              const welcomeEndDateInput = welcomeForm.querySelector('[id^="end-date"]');
+              const welcomeGuestsInput = welcomeForm.querySelector('[id^="guests-count"]');
+
+              if (welcomeSearchInput) welcomeSearchInput.value = '';
+              if (welcomeStartDateInput) {
+                welcomeStartDateInput.value = formattedToday;
+                welcomeStartDateInput.dataset.userInteracted = 'false';
+              }
+              if (welcomeEndDateInput) {
+                welcomeEndDateInput.value = formattedEndOfYear;
+                welcomeEndDateInput.dataset.userInteracted = 'false';
+              }
+              if (welcomeGuestsInput) {
+                welcomeGuestsInput.value = guestsInput.value;
+                welcomeGuestsInput.dataset.userInteracted = 'false';
+              }
+            }
+          } else if (form.id === 'package-search-form-welcome') {
+            const headerForm = document.getElementById('package-search-form-header');
+            if (headerForm) {
+              const headerSearchInput = headerForm.querySelector('.search-input');
+              const headerStartDateInput = headerForm.querySelector('[id^="start-date"]');
+              const headerEndDateInput = headerForm.querySelector('[id^="end-date"]');
+              const headerGuestsInput = headerForm.querySelector('[id^="guests-count"]');
+
+              if (headerSearchInput) headerSearchInput.value = '';
+              if (headerStartDateInput) {
+                headerStartDateInput.value = formattedToday;
+                headerStartDateInput.dataset.userInteracted = 'false';
+              }
+              if (headerEndDateInput) {
+                headerEndDateInput.value = formattedEndOfYear;
+                headerEndDateInput.dataset.userInteracted = 'false';
+              }
+              if (headerGuestsInput) {
+                headerGuestsInput.value = guestsInput.value;
+                headerGuestsInput.dataset.userInteracted = 'false';
+              }
+            }
+          }
+
+          // Cambiar el botón de vuelta a modo búsqueda
+          this.classList.remove('reset-mode');
+          this.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          `;
+          this.setAttribute('title', 'Buscar');
+
+          // Importante: Ejecutar la búsqueda con criterios vacíos para mostrar todos los paquetes
+          if (typeof window.performAdvancedSearch === 'function') {
+            const emptyFormData = {
+              query: '',
+              startDate: formattedToday,
+              endDate: formattedEndOfYear,
+              guests: '2',
+              dateFilterActive: false,
+              guestsFilterActive: false
+            };
+            window.performAdvancedSearch(emptyFormData);
+          } else if (typeof window.resetPackageView === 'function') {
+            // Alternativa: usar la función global de reset si está disponible
+            window.resetPackageView();
+          }
+        }
+      });
+    }
   });
 
   // Añadir evento de clic para el botón de reset
@@ -192,15 +375,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
               if (welcomeSearchInput) welcomeSearchInput.value = '';
               if (welcomeStartDateInput) {
-                welcomeStartDateInput.value = welcomeStartDateInput.getAttribute('data-default-value') || '';
+                welcomeStartDateInput.value = startDateInput.value;
                 welcomeStartDateInput.dataset.userInteracted = 'false';
               }
               if (welcomeEndDateInput) {
-                welcomeEndDateInput.value = welcomeEndDateInput.getAttribute('data-default-value') || '';
+                welcomeEndDateInput.value = endDateInput.value;
                 welcomeEndDateInput.dataset.userInteracted = 'false';
               }
               if (welcomeGuestsInput) {
-                welcomeGuestsInput.value = welcomeGuestsInput.getAttribute('data-default-value') || '2';
+                welcomeGuestsInput.value = guestsInput.value;
                 welcomeGuestsInput.dataset.userInteracted = 'false';
               }
             }
@@ -214,214 +397,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
               if (headerSearchInput) headerSearchInput.value = '';
               if (headerStartDateInput) {
-                headerStartDateInput.value = headerStartDateInput.getAttribute('data-default-value') || '';
+                headerStartDateInput.value = startDateInput.value;
                 headerStartDateInput.dataset.userInteracted = 'false';
               }
               if (headerEndDateInput) {
-                headerEndDateInput.value = headerEndDateInput.getAttribute('data-default-value') || '';
+                headerEndDateInput.value = endDateInput.value;
                 headerEndDateInput.dataset.userInteracted = 'false';
               }
               if (headerGuestsInput) {
-                headerGuestsInput.value = headerGuestsInput.getAttribute('data-default-value') || '2';
+                headerGuestsInput.value = guestsInput.value;
                 headerGuestsInput.dataset.userInteracted = 'false';
               }
             }
           }
 
-          // Mostrar todos los paquetes
-          document.querySelectorAll('.package-card').forEach(card => {
-            card.style.display = 'block';
-            card.classList.remove('highlight');
-          });
-
-          // Ocultar mensaje de no resultados
-          const noResultsMessage = document.getElementById('no-results-message');
-          if (noResultsMessage) {
-            noResultsMessage.style.display = 'none';
-          }
-
-          // Volver a cambiar el botón a modo búsqueda
+          // Cambiar el botón de vuelta a modo búsqueda
           this.classList.remove('reset-mode');
           this.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            `;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          `;
           this.setAttribute('title', 'Buscar');
 
-          // Desplazarse a la sección de paquetes
-          const packagesSection = document.getElementById('packages-section');
-          if (packagesSection) {
-            packagesSection.scrollIntoView({ behavior: 'smooth' });
+          // Importante: Ejecutar la búsqueda con criterios vacíos para mostrar todos los paquetes
+          if (typeof window.performAdvancedSearch === 'function') {
+            const emptyFormData = {
+              query: '',
+              startDate: '',
+              endDate: '',
+              guests: '',
+              dateFilterActive: false,
+              guestsFilterActive: false
+            };
+            window.performAdvancedSearch(emptyFormData);
+          } else if (typeof window.resetPackageView === 'function') {
+            // Alternativa: usar la función global de reset si está disponible
+            window.resetPackageView();
           }
         }
       });
-    }
-  });
-
-  // Función para realizar la búsqueda avanzada
-  function performAdvancedSearch(data) {
-    // Desplazarse a la sección de paquetes
-    const packagesSection = document.getElementById('packages-section');
-    if (packagesSection) {
-      packagesSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    console.log('Realizando búsqueda avanzada con datos:', data);
-
-    // Filtrar paquetes según los criterios
-    const packageCards = document.querySelectorAll('.package-card');
-    let matchCount = 0;
-
-    packageCards.forEach(card => {
-      // Obtener datos del paquete
-      const cardText = card.textContent.toLowerCase();
-      const cardTags = card.getAttribute('data-package-tags') || '';
-
-      // Verificar si coincide con la búsqueda de texto
-      const matchesText = data.query ?
-        (cardText.includes(data.query.toLowerCase()) ||
-          cardTags.toLowerCase().includes(data.query.toLowerCase())) : true;
-
-      // Verificar fechas solo si el filtro de fechas está activo
-      let matchesDates = true;
-      if (data.dateFilterActive && data.startDate && data.endDate) {
-        try {
-          // Convertir strings a objetos Date
-          const startDate = new Date(data.startDate);
-          const endDate = new Date(data.endDate);
-
-          // Verificar que las fechas sean válidas
-          if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-            console.error('Fechas inválidas:', data.startDate, data.endDate);
-            matchesDates = false;
-          } else {
-            // Obtener las fechas de salida del paquete
-            const departureDatesStr = card.getAttribute('data-departure-dates') || '';
-            if (!departureDatesStr) {
-              matchesDates = false;
-            } else {
-              const departureDates = departureDatesStr.split(',').map(dateStr => {
-                return new Date(dateStr.trim());
-              });
-
-              // Verificar si alguna fecha de salida coincide con el rango seleccionado
-              matchesDates = departureDates.some(date => {
-                // Verificar que la fecha sea válida
-                if (isNaN(date.getTime())) {
-                  console.error('Fecha de salida inválida:', date);
-                  return false;
-                }
-
-                // Comparar fechas completas
-                return date >= startDate && date <= endDate;
-              });
-
-              console.log(`Paquete ${card.querySelector('h3').textContent}:`, {
-                fechasSalida: departureDatesStr,
-                dentroDelRango: matchesDates,
-                rangoSeleccionado: `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-              });
-            }
-          }
-        } catch (error) {
-          console.error('Error al procesar fechas:', error);
-          matchesDates = false;
-        }
-      }
-
-      // Verificar número de invitados solo si el filtro de invitados está activo
-      let matchesGuests = true;
-      if (data.guestsFilterActive && data.guests) {
-        const minGuests = parseInt(card.getAttribute('data-min-guests') || '0');
-        const maxGuests = parseInt(card.getAttribute('data-max-guests') || '999');
-        matchesGuests = parseInt(data.guests) >= minGuests && parseInt(data.guests) <= maxGuests;
-      }
-
-      // Mostrar u ocultar el paquete según los criterios combinados
-      if (matchesText && matchesDates && matchesGuests) {
-        card.style.display = 'block';
-        card.classList.add('highlight');
-        matchCount++;
-      } else {
-        card.style.display = 'none';
-        card.classList.remove('highlight');
-      }
-    });
-
-    console.log(`Se encontraron ${matchCount} paquetes que coinciden con los criterios.`);
-
-    // Mostrar mensaje si no hay resultados
-    const noResultsMessage = document.getElementById('no-results-message');
-    if (noResultsMessage) {
-      if (matchCount === 0) {
-        noResultsMessage.style.display = 'block';
-      } else {
-        noResultsMessage.style.display = 'none';
-      }
-    }
-  }
-});
-
-// Añadir detectores de interacción para los campos de fecha y huéspedes
-document.querySelectorAll('[id^="start-date"], [id^="end-date"]').forEach(dateInput => {
-  // Guardar el valor inicial como valor por defecto
-  dateInput.setAttribute('data-default-value', dateInput.value);
-
-  // Inicializar el atributo de datos
-  dateInput.dataset.userInteracted = 'false';
-
-  // Detectar cuando el usuario interactúa con el campo
-  dateInput.addEventListener('change', function () {
-    this.dataset.userInteracted = 'true';
-    // Sincronizar el estado de interacción con el campo correspondiente en el otro formulario
-    const isHeader = this.id.includes('header');
-    const correspondingId = isHeader ?
-      this.id.replace('header', 'welcome') :
-      this.id.replace('welcome', 'header');
-
-    const correspondingInput = document.getElementById(correspondingId);
-    if (correspondingInput) {
-      correspondingInput.dataset.userInteracted = 'true';
-    }
-
-    // Si es el campo de fecha final, y también hay una fecha inicial, ejecutar la búsqueda automáticamente
-    if (this.id.includes('end-date')) {
-      const formId = isHeader ? 'package-search-form-header' : 'package-search-form-welcome';
-      const form = document.getElementById(formId);
-      const startDateInput = form.querySelector('[id^="start-date"]');
-
-      if (form && startDateInput && startDateInput.value && this.value) {
-        console.log('Ejecutando búsqueda automática después de seleccionar fecha final');
-        // Simular el envío del formulario
-        const submitEvent = new Event('submit', { cancelable: true });
-        form.dispatchEvent(submitEvent);
-      }
-    }
-  });
-});
-
-document.querySelectorAll('[id^="guests-count"]').forEach(guestsInput => {
-  // Guardar el valor inicial como valor por defecto
-  guestsInput.setAttribute('data-default-value', guestsInput.value || '2');
-
-  // Inicializar el atributo de datos
-  guestsInput.dataset.userInteracted = 'false';
-
-  // Detectar cuando el usuario interactúa con el campo
-  guestsInput.addEventListener('change', function () {
-    this.dataset.userInteracted = 'true';
-    // Sincronizar el estado de interacción con el campo correspondiente en el otro formulario
-    const isHeader = this.id.includes('header');
-    const correspondingId = isHeader ?
-      this.id.replace('header', 'welcome') :
-      this.id.replace('welcome', 'header');
-
-    const correspondingInput = document.getElementById(correspondingId);
-    if (correspondingInput) {
-      correspondingInput.dataset.userInteracted = 'true';
     }
   });
 
