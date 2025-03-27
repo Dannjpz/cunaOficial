@@ -820,3 +820,15 @@
     font-size: 2rem;
     /* Iconos ligeramente más grandes */
 }
+/* Add these styles after your existing .nav-btn styles */
+.nav-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.packages-navigation.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

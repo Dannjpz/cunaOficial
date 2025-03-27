@@ -36,8 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Desplazarse hasta la sección de paquetes
-        packagesSection.scrollIntoView({ behavior: 'smooth' });
+        // Desplazarse hasta la sección de paquetes solo si existe
+        if (packagesSection) {
+            packagesSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            console.warn('Packages section not found on this page');
+        }
     }
 
     // Eventos de envío de los formularios de búsqueda

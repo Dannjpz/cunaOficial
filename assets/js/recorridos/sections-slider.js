@@ -1,3 +1,28 @@
+// Define the toggleNavigationButtons function at the top of the file
+function toggleNavigationButtons(disable) {
+  const navigationContainer = document.querySelector('.packages-navigation');
+  const navigationButtons = document.querySelectorAll('.packages-navigation .nav-btn');
+  
+  if (navigationContainer) {
+    if (disable) {
+      navigationContainer.classList.add('disabled');
+    } else {
+      navigationContainer.classList.remove('disabled');
+    }
+  }
+  
+  navigationButtons.forEach(button => {
+    if (disable) {
+      button.classList.add('disabled');
+      button.disabled = true;
+    } else {
+      button.classList.remove('disabled');
+      button.disabled = false;
+    }
+  });
+}
+
+// Single DOMContentLoaded event handler
 document.addEventListener('DOMContentLoaded', function () {
   var $cont = document.querySelector('.cont');
   var $elsArr = [].slice.call(document.querySelectorAll('.el'));
@@ -135,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
     showPackageGroup(1);
   }, 200);
 
+  // Add click events to packages for opening
   $elsArr.forEach(function ($el) {
     $el.addEventListener('click', function () {
       if (this.classList.contains('s--active')) return;
@@ -151,9 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
       if (this.classList.contains('repositioned')) {
         this.style.transform = 'translate3d(0, 0, 0)';
       }
+      
+      // Disable navigation when package is opened
+      toggleNavigationButtons(true);
     });
   });
 
+  // Add click events to close buttons
   $closeBtnsArr.forEach(function ($btn) {
     $btn.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -173,6 +203,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       $cont.classList.remove('s--el-active');
       document.querySelector('.el.s--active').classList.remove('s--active');
+      
+      // Enable navigation when package is closed
+      toggleNavigationButtons(false);
     });
   });
 

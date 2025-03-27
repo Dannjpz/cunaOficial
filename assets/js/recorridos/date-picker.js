@@ -77,12 +77,17 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (resetBtn) resetBtn.style.display = 'block';
                             
                             // Activar búsqueda cuando cambia la fecha final
-                            window.filterSections({
+                            // Modify around line 80 in date-picker.js
+                            if (typeof window.filterSections === 'function') {
+                              window.filterSections({
                                 query: document.querySelector(`#${formId} .search-input`).value,
                                 startDate: startInput.value,
                                 endDate: endInput.value,
                                 dateFilterActive: true
-                            });
+                              });
+                            } else {
+                              console.warn('filterSections function not available');
+                            }
                         }
                     }
                 }
