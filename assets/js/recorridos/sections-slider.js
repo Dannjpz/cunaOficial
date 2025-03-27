@@ -204,7 +204,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('Filtrando con criterios:', criteria);
 
-    // Primera pasada: determinar qué secciones son visibles
+    // Mostrar el botón de reset cuando se filtran por fecha
+    if (criteria.dateFilterActive) {
+      const resetBtn = document.querySelector('.reset-search-btn');
+      if (resetBtn) resetBtn.style.display = 'block';
+    }
+
     sections.forEach(function (section) {
       var tags = section.getAttribute('data-package-tags') || '';
       var description = section.querySelector('.el__text p') ?
@@ -224,60 +229,41 @@ document.addEventListener('DOMContentLoaded', function () {
           description.includes(query);
       }
 
-      // Verificar coincidencia con fechas
+      // Mejorar la verificación de fechas
       var matchesDate = true;
       if (criteria.dateFilterActive && criteria.startDate) {
-        try {
-          var departureDate = new Date(departureDateStr);
-          var searchStartDate = new Date(criteria.startDate);
+          try {
+              // Obtener todas las fechas de salida
+              var departureDates = (departureDateStr || '').split(',').map(date => date.trim());
+              var searchStartDate = new Date(criteria.startDate);
+              var searchEndDate = criteria.endDate ? new Date(criteria.endDate) : null;
 
-          // Verificar que las fechas sean válidas
-          if (!isNaN(departureDate.getTime()) && !isNaN(searchStartDate.getTime())) {
-            // La fecha de salida debe ser igual o posterior a la fecha de inicio de búsqueda
-            matchesDate = departureDate >= searchStartDate;
+              // Verificar si al menos una fecha de salida está en el rango
+              matchesDate = departureDates.some(dateStr => {
+                  var departureDate = new Date(dateStr);
+                  if (isNaN(departureDate.getTime())) return false;
 
-            // Si también hay fecha final de búsqueda, verificar que esté dentro del rango
-            if (matchesDate && criteria.endDate) {
-              var searchEndDate = new Date(criteria.endDate);
-              if (!isNaN(searchEndDate.getTime())) {
-                matchesDate = departureDate <= searchEndDate;
-              }
-            }
+                  if (searchEndDate) {
+                      return departureDate >= searchStartDate && departureDate <= searchEndDate;
+                  } else {
+                      return departureDate >= searchStartDate;
+                  }
+              });
+          } catch (e) {
+              console.error('Error al procesar fechas:', e);
+              matchesDate = false;
           }
-        } catch (e) {
-          console.error('Error al procesar fechas:', e);
-          matchesDate = false;
-        }
       }
 
-      // Ya no filtramos por número de huéspedes, solo calculamos el precio
-      if (criteria.guests) {
-        // Obtener el precio base del paquete
-        var priceElement = section.querySelector('.package-price');
-        if (priceElement) {
-          var priceText = priceElement.textContent;
-          var basePrice = parseInt(priceText.replace(/[^0-9]/g, ''));
-
-          // Calcular el precio total basado en el número de huéspedes
-          var guestCount = parseInt(criteria.guests);
-          var totalPrice = basePrice * guestCount;
-
-          // Actualizar el texto del precio para mostrar el total
-          priceElement.innerHTML = `$${totalPrice.toLocaleString()} MXN <small>(${guestCount} personas)</small>`;
-        }
-      }
-
-      // Determinar si esta sección debe ser visible
-      var isVisible = matchesQuery && matchesDate;
-
-      if (isVisible) {
-        visibleSections.push(section);
-        visibleCount++;
+      // Actualizar visibilidad
+      if (matchesQuery && matchesDate) {
+          visibleCount++;
+          visibleSections.push(section);
+          section.style.display = '';
+          section.style.opacity = '1';
       } else {
-        // Ocultar las secciones que no coinciden
-        section.style.opacity = '0';
-        section.style.pointerEvents = 'none';
-        section.style.display = 'none';
+          section.style.display = 'none';
+          section.style.opacity = '0';
       }
     });
 

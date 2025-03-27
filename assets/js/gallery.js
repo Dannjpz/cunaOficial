@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = document.querySelector('.prev-img');
   const nextBtn = document.querySelector('.next-img');
   
+  // Check if gallery elements exist before proceeding
+  if (!galleryItems.length || !modal || !modalImg || !modalCaption || !closeBtn || !prevBtn || !nextBtn) {
+    console.log('Gallery elements not found on this page');
+    return;
+  }
+  
   let currentIndex = 0;
   
   // Función para abrir el modal con la imagen seleccionada
@@ -219,15 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleGalleryTitleAnimation() {
   const galleryTitle = document.querySelector('.gallery-title.slide-in-right');
   
-  if (!galleryTitle) return;
+  if (!galleryTitle) {
+    console.log('Gallery title not found on this page');
+    return;
+  }
   
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Añadir la clase cuando es visible
       if (entry.isIntersecting) {
         galleryTitle.classList.add('active');
       } else {
-        // Remover la clase cuando no es visible para reiniciar la animación
         galleryTitle.classList.remove('active');
       }
     });
@@ -236,7 +243,9 @@ function handleGalleryTitleAnimation() {
   observer.observe(galleryTitle);
 }
 
-// Iniciar la animación cuando el DOM esté cargado
+// Initialize only if we're on a page with gallery elements
 document.addEventListener('DOMContentLoaded', function() {
-  handleGalleryTitleAnimation();
+  if (document.querySelector('.gallery-item')) {
+    handleGalleryTitleAnimation();
+  }
 });

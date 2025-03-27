@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mantener registro de los calendarios activos
     let activeCalendar = null;
+    
+    // Variable para evitar llamadas recursivas durante la validación
+    let isProcessingChange = false;
 
     // Configurar cada input de fecha
     startDateInputs.forEach(input => {
@@ -18,6 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupDatePicker(dateInput, isStartDate) {
         // Crear contenedor para el calendario si no existe
         let container = dateInput.closest('.date-picker-container');
+        
+        // Establecer límites de fecha
+        const today = new Date();
+        const maxDate = new Date(today.getFullYear() + 1, 11, 31); // Último día del año siguiente
+        
+        if (isStartDate) {
+            dateInput.min = today.toISOString().split('T')[0];
+            dateInput.max = maxDate.toISOString().split('T')[0];
+        } else {
+            dateInput.max = maxDate.toISOString().split('T')[0];
+        }
 
         if (!container) {
             container = document.createElement('div');
@@ -34,6 +48,48 @@ document.addEventListener('DOMContentLoaded', function () {
             calendarDropdown.className = 'calendar-dropdown';
             container.appendChild(calendarDropdown);
         }
+
+        // Añadir evento change para validar fechas y activar búsqueda
+        dateInput.addEventListener('change', function() {
+            if (isProcessingChange) return; // Evitar llamadas recursivas
+            isProcessingChange = true;
+            
+            try {
+                const formId = this.closest('form').id;
+                const startInput = document.getElementById(formId === 'package-search-form-header' ? 'start-date-header' : 'start-date-welcome');
+                const endInput = document.getElementById(formId === 'package-search-form-header' ? 'end-date-header' : 'end-date-welcome');
+                
+                if (startInput && endInput) {
+                    const startDate = new Date(startInput.value);
+                    const endDate = new Date(endInput.value);
+                    
+                    if (isStartDate) {
+                        // Si la fecha final es anterior a la inicial, actualizar la fecha final
+                        if (endInput.value && endDate < startDate) {
+                            endInput.value = startInput.value;
+                        }
+                        // Actualizar el mínimo de la fecha final
+                        endInput.min = startInput.value;
+                    } else {
+                        // Si es la fecha final, mostrar botón de reset y activar búsqueda
+                        if (startInput.value && endInput.value) {
+                            const resetBtn = document.querySelector('.reset-search-btn');
+                            if (resetBtn) resetBtn.style.display = 'block';
+                            
+                            // Activar búsqueda cuando cambia la fecha final
+                            window.filterSections({
+                                query: document.querySelector(`#${formId} .search-input`).value,
+                                startDate: startInput.value,
+                                endDate: endInput.value,
+                                dateFilterActive: true
+                            });
+                        }
+                    }
+                }
+            } finally {
+                isProcessingChange = false; // Restablecer bandera
+            }
+        });
 
         // Configurar evento click para mostrar/ocultar el calendario
         dateInput.addEventListener('click', function (e) {
@@ -249,23 +305,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // Evento click para seleccionar fecha
-            dayElem.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evitar que el clic cierre el calendario
+            // Evento click para seleccionar día
+            dayElem.addEventListener('click', function () {
+                if (dayElem.classList.contains('disabled')) return;
 
-                if (!dayElem.classList.contains('disabled')) {
-                    // Formatear fecha para el input
-                    const formattedDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    input.value = formattedDate;
+                // Actualizar input con la fecha seleccionada
+                const selectedDate = new Date(year, month, day);
+                input.value = selectedDate.toISOString().split('T')[0];
 
-                    // Cerrar el calendario
-                    dropdown.classList.remove('active');
-                    activeCalendar = null;
+                // Cerrar el calendario
+                dropdown.classList.remove('active');
+                activeCalendar = null;
 
-                    // Disparar evento change para actualizar cualquier listener
-                    const event = new Event('change', { bubbles: true });
-                    input.dispatchEvent(event);
+                // Si es la fecha final, mostrar el botón de reset
+                if (!isStartDate) {
+                    const resetBtn = document.querySelector('.reset-search-btn');
+                    if (resetBtn) resetBtn.style.display = 'block';
                 }
+
+                // Disparar evento change para actualizar cualquier listener
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
             });
 
             daysGrid.appendChild(dayElem);
@@ -276,23 +336,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validar fechas cuando cambien
     function validateDates() {
-        startDateInputs.forEach(startInput => {
-            const formId = startInput.closest('form').id;
-            const endInputId = startInput.id.replace('start-date', 'end-date');
-            const endInput = document.getElementById(endInputId);
-
-            if (startInput.value && endInput && endInput.value) {
-                const startDate = new Date(startInput.value);
-                const endDate = new Date(endInput.value);
-
-                if (startDate > endDate) {
-                    endInput.value = startInput.value;
-                    // Disparar evento change para actualizar cualquier listener
-                    const event = new Event('change', { bubbles: true });
-                    endInput.dispatchEvent(event);
+        if (isProcessingChange) return; // Evitar validación recursiva
+        isProcessingChange = true;
+        
+        try {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const maxDate = new Date(today.getFullYear() + 1, 11, 31);
+            
+            startDateInputs.forEach(startInput => {
+                const endInput = document.getElementById(startInput.id.replace('start-date', 'end-date'));
+                if (startInput.value && endInput?.value) {
+                    const startDate = new Date(startInput.value);
+                    const endDate = new Date(endInput.value);
+                    
+                    let shouldTriggerChange = false;
+                    
+                    // Validar que la fecha inicial no sea menor a la actual
+                    if (startDate < today) {
+                        startInput.value = today.toISOString().split('T')[0];
+                        shouldTriggerChange = true;
+                    }
+                    
+                    // Validar que la fecha final no sobrepase el año actual + 1
+                    if (endDate > maxDate) {
+                        endInput.value = maxDate.toISOString().split('T')[0];
+                        shouldTriggerChange = true;
+                    }
+                    
+                    // Validar que la fecha final no sea anterior a la inicial
+                    if (endDate < startDate) {
+                        endInput.value = startInput.value;
+                        shouldTriggerChange = true;
+                    }
+                    
+                    if (shouldTriggerChange) {
+                        endInput.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
                 }
-            }
-        });
+            });
+        } finally {
+            isProcessingChange = false;
+        }
     }
 
     // Añadir listeners para validación
@@ -307,27 +392,46 @@ document.addEventListener('DOMContentLoaded', function () {
     // Inicializar con la fecha actual para los campos vacíos
     function initializeWithCurrentDate() {
         const today = new Date();
-        const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        const formattedToday = today.toISOString().split('T')[0];
 
         startDateInputs.forEach(input => {
             if (!input.value) {
                 input.value = formattedToday;
+                // Trigger change event
+                input.dispatchEvent(new Event('change'));
             }
         });
 
         // Para la fecha final, usar el 7 de diciembre del año actual
-        const endOfYear = new Date();
-        endOfYear.setMonth(11); // Diciembre (0-indexed)
-        endOfYear.setDate(7);   // Día 7
-        const formattedEndOfYear = `${endOfYear.getFullYear()}-12-07`;
+        const endOfYear = new Date(today.getFullYear(), 11, 7); // 7 de diciembre
+        const formattedEndOfYear = endOfYear.toISOString().split('T')[0];
 
         endDateInputs.forEach(input => {
             if (!input.value) {
                 input.value = formattedEndOfYear;
+                // Trigger change event
+                input.dispatchEvent(new Event('change'));
             }
         });
     }
 
     // Inicializar fechas
     initializeWithCurrentDate();
+    
+    // Eliminar este bloque que causa error (dateInput no está definido en este contexto)
+    // dateInput.addEventListener('change', function() {
+    //     const formId = this.closest('form').id;
+    //     const startInput = document.getElementById(formId === 'package-search-form-header' ? 'start-date-header' : 'start-date-welcome');
+    //     const endInput = document.getElementById(formId === 'package-search-form-header' ? 'end-date-header' : 'end-date-welcome');
+    //
+    //     if (startInput.value && endInput.value) {
+    //         // Trigger search with date range
+    //         window.filterSections({
+    //             query: document.querySelector(`#${formId} .search-input`).value,
+    //             startDate: startInput.value,
+    //             endDate: endInput.value,
+    //             dateFilterActive: true
+    //         });
+    //     }
+    // });
 });
