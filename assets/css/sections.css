@@ -505,6 +505,11 @@
     text-align: center;
     position: relative;
     z-index: 2;
+    /* Añadir los mismos estilos que tiene el título de la galería */
+    font-family: var(--font-vintage-4); /* Cinzel */
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Configuración para el paquete 6 */
