@@ -10,9 +10,7 @@
     position: relative;
     overflow: hidden;
     height: 100vh;
-    /* Reducido de 100vh a 80vh para hacer el contenedor más pequeño */
-    padding: 80px 70px;
-    padding-bottom: 120px;
+    padding: 80px 70px 0; /* Changed padding-bottom to 0 */
 }
 
 .cont__inner {
@@ -483,13 +481,18 @@
 #hero-section {
     padding: 0;
     padding-top: 120px;
-    padding-bottom: 120px;
+    padding-bottom: 20px;
     margin: 0;
     margin-bottom: 50px;
     position: relative;
     background-image: url('/images/back3.png');
     background-color: var(--color1);
     /* Color de fondo base */
+}
+
+#hero-section {
+    margin-bottom: 0;
+    border-bottom: none;
 }
 
 #hero-section .cont {

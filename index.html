@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="assets/css/index.css" />
   <!-- Añadir el nuevo CSS para las secciones deslizantes -->
   <link rel="stylesheet" href="assets/css/sections.css" />
+  <link rel="stylesheet" href="assets/css/gallery.css" />
+  <link rel="stylesheet" href="assets/css/butterflies-effect.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -493,26 +495,65 @@
 
     <!-- SECCIÓN: GALERÍA -->
     <section id="gallery-section">
+      <!-- Contenedor para el efecto de mariposas -->
+      <div id="butterflies-container" class="butterflies-background"></div>
+      
       <div class="logo-container gallery-wrapper">
-        <h2 class="gallery-title">Nuestra Galería</h2>
+        <h2 class="gallery-title slide-in-right">Nuestra Galería</h2>
         <div class="gallery-container">
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 1">
+            <img src="images/paisaje_1.jpg" alt="Imagen de galería 1" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Experiencia Culinaria</h3>
+                <p>Descubre nuestros sabores únicos</p>
+              </div>
+            </div>
           </div>
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 2">
+            <img src="images/paisaje_2.jpg" alt="Imagen de galería 2" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Tradición Mexicana</h3>
+                <p>Cultura y gastronomía</p>
+              </div>
+            </div>
           </div>
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 3">
+            <img src="images/paisaje_3.jpg" alt="Imagen de galería 3" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Viñedos</h3>
+                <p>Recorridos y catas exclusivas</p>
+              </div>
+            </div>
           </div>
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 4">
+            <img src="images/paisaje_4.jpg" alt="Imagen de galería 4" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Talleres Culinarios</h3>
+                <p>Aprende con nuestros chefs</p>
+              </div>
+            </div>
           </div>
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 5">
+            <img src="images/paisaje_5.jpg" alt="Imagen de galería 5" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Eventos Especiales</h3>
+                <p>Celebraciones memorables</p>
+              </div>
+            </div>
           </div>
           <div class="gallery-item">
-            <img src="images/back.png" alt="Imagen de galería 6">
+            <img src="images/paisaje_6.jpg" alt="Imagen de galería 6" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-info">
+                <h3>Aventuras Gastronómicas</h3>
+                <p>Explora nuevos sabores</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -542,6 +583,9 @@
   <script src="assets/js/recorridos/sections-slider.js"></script>
   <script src="assets/js/recorridos/price-calculator.js"></script>
   <script src="assets/js/recorridos/search-improvements.js"></script>
+  <script src="assets/js/gallery.js"></script>
+  <script type="module" src="assets/js/butterflies-gallery.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,348 @@
+/* Estilos para la sección de galería */
+#gallery-section {
+    padding: 0 0 4rem 0; /* Remove top padding */
+    background-color: var(--color6);
+    position: relative;
+    margin-top: 0;
+    border-top: none;
+  }
+
+  .gallery-wrapper {
+    max-width: 1400px; /* Increased from 1200px */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gallery-title.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gallery-title.slide-in-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.gallery-title {
+    font-family: var(--font-vintage-4);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color1); /* Changed from var(--color2) to var(--color1) for a different color */
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 120px;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Added subtle text shadow for depth */
+}
+
+.gallery-title::after {
+    display: none; /* Remove the line completely */
+  }
+
+/* Nuevo estilo para contenedor con efecto masonry */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Increased from 280px to 350px */
+    grid-auto-rows: 10px;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px; /* Increased from 1200px if needed */
+    margin: 0 auto;
+}
+
+/* Nuevo estilo para items con tamaños variables */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease;
+  grid-row-end: span 30; /* Altura base */
+  background-color: var(--color3);
+  border: 3px solid white;
+}
+
+/* Alturas variables para crear efecto masonry */
+.gallery-item:nth-child(1) { grid-row-end: span 35; }
+.gallery-item:nth-child(2) { grid-row-end: span 28; }
+.gallery-item:nth-child(3) { grid-row-end: span 32; }
+.gallery-item:nth-child(4) { grid-row-end: span 38; }
+.gallery-item:nth-child(5) { grid-row-end: span 30; }
+.gallery-item:nth-child(6) { grid-row-end: span 36; }
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: saturate(0.9);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+  filter: saturate(1.2) brightness(1.05);
+}
+
+/* Nuevo efecto de overlay con gradiente mejorado */
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(0, 0, 0, 0.4) 30%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  opacity: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(10px);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mejora en la animación de la información */
+.gallery-info {
+  color: white;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 100%;
+  opacity: 0;
+}
+
+.gallery-item:hover .gallery-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-vintage-4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: inline-block;
+}
+
+/* Nuevo efecto de subrayado animado */
+.gallery-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color1);
+  transition: width 0.3s ease;
+}
+
+.gallery-item:hover .gallery-info h3::after {
+  width: 100%;
+}
+
+.gallery-info p {
+  font-size: 1rem;
+  opacity: 0.8;
+  font-family: var(--font-sans);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Modal mejorado para ver imágenes en tamaño completo */
+.gallery-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.gallery-modal.show {
+  opacity: 1;
+  display: block;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #fff;
+  padding: 15px 0;
+  height: 50px;
+  font-family: var(--font-vintage-4);
+  font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.modal-caption.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--color1);
+  transform: rotate(90deg);
+}
+
+/* Botones de navegación mejorados */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-nav:hover {
+  background-color: var(--color1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-img {
+  left: 20px;
+}
+
+.next-img {
+  right: 20px;
+}
+
+/* Animación mejorada para las imágenes al cargar la página */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-item {
+  opacity: 0;
+  animation: fadeInScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; }
+.gallery-item:nth-child(5) { animation-delay: 0.5s; }
+.gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  
+  .modal-content {
+    max-width: 95%;
+  }
+  
+  .modal-nav {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-title {
+    font-size: 2rem;
+  }
+  
+  .modal-caption {
+    width: 95%;
+  }
+  
+  .gallery-item {
+    border-radius: 8px;
+    border-width: 2px;
+  }
+}
