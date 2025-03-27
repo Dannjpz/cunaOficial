@@ -832,8 +832,8 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem 0;
-  margin-top: 2rem;
+  padding: 0rem 0;
+  margin-top: 0rem;
   position: relative;
 }
 
@@ -872,6 +872,7 @@ input[type="number"]::-webkit-outer-spin-button {
   right: 2rem;
   z-index: 30;
 }
+
 
 .social-link {
   display: flex;
@@ -1170,11 +1171,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #social-section {
-  padding: 20px 0;
-  margin-top: 20px;
-  display: block;
-  width: 100%;
   position: relative;
+  margin: 0;  /* Eliminar cualquier margen */
+  padding: 0; /* Eliminar cualquier padding */
+  background: transparent; /* Hacer el fondo transparente */
+  height: auto;
+  min-height: 0;
 }
 
 .video-background {

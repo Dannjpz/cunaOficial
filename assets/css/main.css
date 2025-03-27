@@ -58,3 +58,18 @@
   --font-retro-4: 'Homemade Apple', cursive;
   --font-retro-5: 'Satisfy', cursive;
 }
+
+.fade-in,
+.slide-in,
+.zoom-in {
+  will-change: transform, opacity;
+}
+
+.gallery-item,
+.faq-item {
+  will-change: transform;
+}
+
+#animated-footer .background {
+  will-change: transform, opacity;
+}

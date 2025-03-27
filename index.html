@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/css/gallery.css" />
   <link rel="stylesheet" href="assets/css/butterflies-effect.css" />
   <link rel="stylesheet" href="assets/css/faq.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -498,7 +499,7 @@
     <section id="gallery-section">
       <!-- Contenedor para el efecto de mariposas -->
       <div id="butterflies-container" class="butterflies-background"></div>
-      
+
       <div class="logo-container gallery-wrapper">
         <h2 class="gallery-title slide-in-right">Nuestra Galería</h2>
         <div class="gallery-container">
@@ -560,128 +561,201 @@
       </div>
     </section>
 
-       <!-- SECCIÓN: PREGUNTAS FRECUENTES -->
-       <section id="faq-section">
-        <div class="faq-container">
-          <h2 class="faq-title slide-in-right">Preguntas Frecuentes</h2>
-          <p class="faq-subtitle">Todo lo que necesitas saber sobre nuestras experiencias gastronómicas</p>
-          
-          <div class="faq-search">
-            <input type="text" id="faq-search-input" placeholder="Buscar preguntas...">
-            <button id="faq-search-btn"><i class="fas fa-search"></i></button>
-          </div>
-          
-          <div class="faq-categories">
-            <button class="faq-category-btn active" data-category="all">Todas</button>
-            <button class="faq-category-btn" data-category="reservas">Reservas</button>
-            <button class="faq-category-btn" data-category="experiencias">Experiencias</button>
-            <button class="faq-category-btn" data-category="pagos">Pagos</button>
-            <button class="faq-category-btn" data-category="ubicacion">Ubicación</button>
-          </div>
-          
-          <div class="faq-accordion">
-            <!-- Preguntas de Reservas -->
-            <div class="faq-item" data-category="reservas">
-              <div class="faq-question">
-                <h3>¿Cómo puedo hacer una reserva?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Puedes realizar tu reserva a través de nuestra página web en la sección "Reservar", llamando al teléfono (123) 456-7890 o enviando un correo a reservas@cunadesabores.com con al menos 48 horas de anticipación.</p>
-              </div>
+    <!-- SECCIÓN: PREGUNTAS FRECUENTES -->
+    <section id="faq-section">
+      <div class="faq-container">
+        <h2 class="faq-title slide-in-right">Preguntas Frecuentes</h2>
+        <p class="faq-subtitle">Todo lo que necesitas saber sobre nuestras experiencias gastronómicas</p>
+
+        <div class="faq-search">
+          <input type="text" id="faq-search-input" placeholder="Buscar preguntas...">
+          <button id="faq-search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="faq-categories">
+          <button class="faq-category-btn active" data-category="all">Todas</button>
+          <button class="faq-category-btn" data-category="reservas">Reservas</button>
+          <button class="faq-category-btn" data-category="experiencias">Experiencias</button>
+          <button class="faq-category-btn" data-category="pagos">Pagos</button>
+          <button class="faq-category-btn" data-category="ubicacion">Ubicación</button>
+        </div>
+
+        <div class="faq-accordion">
+          <!-- Preguntas de Reservas -->
+          <div class="faq-item" data-category="reservas">
+            <div class="faq-question">
+              <h3>¿Cómo puedo hacer una reserva?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
             </div>
-            
-            <div class="faq-item" data-category="reservas">
-              <div class="faq-question">
-                <h3>¿Cuál es la política de cancelación?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Puedes cancelar tu reserva hasta 24 horas antes sin costo. Las cancelaciones con menos de 24 horas tienen un cargo del 30% del valor de la reserva.</p>
-              </div>
-            </div>
-            
-            <!-- Preguntas de Experiencias -->
-            <div class="faq-item" data-category="experiencias">
-              <div class="faq-question">
-                <h3>¿Qué incluyen las experiencias gastronómicas?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Nuestras experiencias incluyen degustación de platillos, bebidas seleccionadas, guía especializado, transporte desde puntos específicos y material informativo. Cada paquete tiene características específicas detalladas en su descripción.</p>
-              </div>
-            </div>
-            
-            <div class="faq-item" data-category="experiencias">
-              <div class="faq-question">
-                <h3>¿Las experiencias son aptas para niños?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>La mayoría de nuestras experiencias son aptas para toda la familia. Contamos con menús especiales para niños y actividades adaptadas. Las experiencias con restricciones de edad están claramente indicadas en su descripción.</p>
-              </div>
-            </div>
-            
-            <!-- Preguntas de Pagos -->
-            <div class="faq-item" data-category="pagos">
-              <div class="faq-question">
-                <h3>¿Qué métodos de pago aceptan?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Aceptamos tarjetas de crédito y débito (Visa, MasterCard, American Express), transferencias bancarias y pago en efectivo para reservas presenciales.</p>
-              </div>
-            </div>
-            
-            <div class="faq-item" data-category="pagos">
-              <div class="faq-question">
-                <h3>¿Se requiere un depósito para reservar?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Sí, para asegurar tu reserva solicitamos un depósito del 30% del valor total. El resto puede pagarse hasta el día de la experiencia.</p>
-              </div>
-            </div>
-            
-            <!-- Preguntas de Ubicación -->
-            <div class="faq-item" data-category="ubicacion">
-              <div class="faq-question">
-                <h3>¿Dónde están ubicados?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Nuestro restaurante principal está ubicado en Av. Gastronómica #123, Colonia Centro. Las experiencias se realizan en diferentes ubicaciones según el paquete seleccionado.</p>
-              </div>
-            </div>
-            
-            <div class="faq-item" data-category="ubicacion">
-              <div class="faq-question">
-                <h3>¿Ofrecen estacionamiento?</h3>
-                <div class="faq-icon"><i class="fas fa-plus"></i></div>
-              </div>
-              <div class="faq-answer">
-                <p>Sí, contamos con estacionamiento gratuito para nuestros clientes en todas nuestras instalaciones.</p>
-              </div>
+            <div class="faq-answer">
+              <p>Puedes realizar tu reserva a través de nuestra página web en la sección "Reservar", llamando al
+                teléfono (123) 456-7890 o enviando un correo a reservas@cunadesabores.com con al menos 48 horas de
+                anticipación.</p>
             </div>
           </div>
-          
-          <div id="faq-no-results" style="display: none;">
-            <i class="fas fa-search" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
-            <h3>No se encontraron resultados</h3>
-            <p>No hay preguntas que coincidan con tu búsqueda. Intenta con otros términos o <a href="/components/contacto.html">contáctanos directamente</a>.</p>
+
+          <div class="faq-item" data-category="reservas">
+            <div class="faq-question">
+              <h3>¿Cuál es la política de cancelación?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Puedes cancelar tu reserva hasta 24 horas antes sin costo. Las cancelaciones con menos de 24 horas
+                tienen un cargo del 30% del valor de la reserva.</p>
+            </div>
+          </div>
+
+          <!-- Preguntas de Experiencias -->
+          <div class="faq-item" data-category="experiencias">
+            <div class="faq-question">
+              <h3>¿Qué incluyen las experiencias gastronómicas?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Nuestras experiencias incluyen degustación de platillos, bebidas seleccionadas, guía especializado,
+                transporte desde puntos específicos y material informativo. Cada paquete tiene características
+                específicas detalladas en su descripción.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="experiencias">
+            <div class="faq-question">
+              <h3>¿Las experiencias son aptas para niños?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>La mayoría de nuestras experiencias son aptas para toda la familia. Contamos con menús especiales para
+                niños y actividades adaptadas. Las experiencias con restricciones de edad están claramente indicadas en
+                su descripción.</p>
+            </div>
+          </div>
+
+          <!-- Preguntas de Pagos -->
+          <div class="faq-item" data-category="pagos">
+            <div class="faq-question">
+              <h3>¿Qué métodos de pago aceptan?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Aceptamos tarjetas de crédito y débito (Visa, MasterCard, American Express), transferencias bancarias y
+                pago en efectivo para reservas presenciales.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="pagos">
+            <div class="faq-question">
+              <h3>¿Se requiere un depósito para reservar?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Sí, para asegurar tu reserva solicitamos un depósito del 30% del valor total. El resto puede pagarse
+                hasta el día de la experiencia.</p>
+            </div>
+          </div>
+
+          <!-- Preguntas de Ubicación -->
+          <div class="faq-item" data-category="ubicacion">
+            <div class="faq-question">
+              <h3>¿Dónde están ubicados?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Nuestro restaurante principal está ubicado en Av. Gastronómica #123, Colonia Centro. Las experiencias
+                se realizan en diferentes ubicaciones según el paquete seleccionado.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="ubicacion">
+            <div class="faq-question">
+              <h3>¿Ofrecen estacionamiento?</h3>
+              <div class="faq-icon"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Sí, contamos con estacionamiento gratuito para nuestros clientes en todas nuestras instalaciones.</p>
+            </div>
           </div>
         </div>
-      </section>
+
+        <div id="faq-no-results" style="display: none;">
+          <i class="fas fa-search" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
+          <h3>No se encontraron resultados</h3>
+          <p>No hay preguntas que coincidan con tu búsqueda. Intenta con otros términos o <a
+              href="/components/contacto.html">contáctanos directamente</a>.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- SECCIÓN: REDES SOCIALES -->
     <section id="social-section">
       <nav class="main-nav"></nav>
+      <!-- Update your image tags -->
       <div class="social-links">
-        <a href="#" class="social-link"><img src="images/logotipo-de-instagram.png" alt="Instagram" /></a>
-        <a href="#" class="social-link"><img src="images/tik-tok.png" alt="TikTok" /></a>
-        <a href="#" class="social-link"><img src="images/facebook.png" alt="Facebook" /></a>
+          <a href="#" class="social-link"><img loading="lazy" src="images/logotipo-de-instagram.png" alt="Instagram" /></a>
+          <a href="#" class="social-link"><img loading="lazy" src="images/tik-tok.png" alt="TikTok" /></a>
+          <a href="#" class="social-link"><img loading="lazy" src="images/facebook.png" alt="Facebook" /></a>
       </div>
     </section>
+
+    <!-- NUEVA SECCIÓN: ANIMACIÓN FOOTER -->
+    <section id="animated-footer">
+      <div class="background">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="Gradient1" cx="50%" cy="50%" fx="0.441602%" fy="50%" r=".5">
+              <animate attributeName="fx" dur="34s" values="0%;3%;0%" repeatCount="indefinite"></animate>
+              <stop offset="0%" stop-color="rgba(255, 0, 255, 1)"></stop>
+              <stop offset="100%" stop-color="rgba(255, 0, 255, 0)"></stop>
+            </radialGradient>
+            <radialGradient id="Gradient2" cx="50%" cy="50%" fx="2.68147%" fy="50%" r=".5">
+              <animate attributeName="fx" dur="23.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
+              <stop offset="0%" stop-color="rgba(255, 255, 0, 1)"></stop>
+              <stop offset="100%" stop-color="rgba(255, 255, 0, 0)"></stop>
+            </radialGradient>
+            <radialGradient id="Gradient3" cx="50%" cy="50%" fx="0.836536%" fy="50%" r=".5">
+              <animate attributeName="fx" dur="21.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
+              <stop offset="0%" stop-color="rgba(0, 255, 255, 1)"></stop>
+              <stop offset="100%" stop-color="rgba(0, 255, 255, 0)"></stop>
+            </radialGradient>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient1)">
+            <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite" />
+            <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="17s"
+              repeatCount="indefinite" />
+          </rect>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient2)">
+            <animate attributeName="x" dur="23s" values="-25%;0%;-25%" repeatCount="indefinite" />
+            <animate attributeName="y" dur="24s" values="0%;50%;0%" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s"
+              repeatCount="indefinite" />
+          </rect>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient3)">
+            <animate attributeName="x" dur="25s" values="0%;25%;0%" repeatCount="indefinite" />
+            <animate attributeName="y" dur="26s" values="0%;25%;0%" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="19s"
+              repeatCount="indefinite" />
+          </rect>
+        </svg>
+      </div>
+      <footer>
+        <section>
+          <ul class="links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Términos</a></li>
+            <li><a href="#">Privacidad</a></li>
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> Dolores Hidalgo Matamoros 49</p>
+            <p><i class="fas fa-phone"></i> Tel: (797) 131-4809 / (797) 129-1265</p>
+            <p><i class="fas fa-clock"></i> Horario: 8:00 AM - 10:00 PM</p>
+          </div>
+          <p class="legal">© 2024 Cuna de Sabores. Todos los derechos reservados.</p>
+        </section>
+      </footer>
+    </section>
+
+
   </div>
 
   <!-- Scripts -->

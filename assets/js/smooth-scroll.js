@@ -41,34 +41,39 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth scroll para toda la página
   let lastTime = 0;
   
+  // Replace the existing smoothScroll function
   function smoothScroll(event) {
-      const currentTime = new Date().getTime();
-      
-      // Limitar la frecuencia de actualización para mejor rendimiento
-      if (currentTime - lastTime < 16) {
-          event.preventDefault();
-          return;
-      }
-      
-      lastTime = currentTime;
+      requestAnimationFrame(() => {
+          const currentTime = new Date().getTime();
+          
+          if (currentTime - lastTime < 16) {
+              event.preventDefault();
+              return;
+          }
+          
+          lastTime = currentTime;
+      });
   }
   
   // Aplicar smooth scroll a la rueda del mouse
   window.addEventListener('wheel', smoothScroll, { passive: false });
   
   // Animación de aparición al hacer scroll
+  // Replace existing animateOnScroll function
   const animateOnScroll = function() {
-      const elements = document.querySelectorAll('.fade-in, .slide-in, .zoom-in');
-      
-      elements.forEach(element => {
-          const elementTop = element.getBoundingClientRect().top;
-          const elementVisible = 150;
-          
-          if (elementTop < window.innerHeight - elementVisible) {
-              element.classList.add('active');
-          } else {
-              element.classList.remove('active');
-          }
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('active');
+              }
+          });
+      }, {
+          threshold: 0.1,
+          rootMargin: '50px'
+      });
+  
+      document.querySelectorAll('.fade-in, .slide-in, .zoom-in').forEach(element => {
+          observer.observe(element);
       });
   };
   
