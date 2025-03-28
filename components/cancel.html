@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Pago Cancelado - Cuna de Sabores</title>
+  <link rel="webwide icon" type="png" href="../images/logoPng-picaai.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/restaurante.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body class="contact is-preload">
+  <div id="page-wrapper">
+    <!-- Header -->
+    <header id="header">
+      <!-- Incluir el componente de barra lateral -->
+      <div id="barraLateral-container"></div>
+    </header>
+
+    <!-- Cancel Section -->
+    <section id="cancel-section" class="wrapper style1">
+      <div class="container">
+        <div class="cancel-content">
+          <i class="fas fa-times-circle cancel-icon"></i>
+          <h2>Pago Cancelado</h2>
+          <p>Has cancelado el proceso de pago. No te preocupes, no se ha realizado ningún cargo a tu tarjeta.</p>
+          <div class="cancel-options">
+            <p>Si tuviste algún problema durante el proceso o necesitas ayuda, no dudes en contactarnos.</p>
+          </div>
+          <div class="button-group">
+            <a href="../index.html" class="button">Volver al Inicio</a>
+            <a href="../index.html#checkout-button" class="button primary">Intentar de Nuevo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <ul class="copyright">
+              <li>&copy; Cuna de Sabores. Todos los derechos reservados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script>
+    // Cargar el componente de barra lateral
+    $(document).ready(function() {
+      $("#barraLateral-container").load("barraLateral.html");
+    });
+  </script>
+</body>
+
+</html>

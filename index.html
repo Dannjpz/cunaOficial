@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="assets/css/butterflies-effect.css" />
   <link rel="stylesheet" href="assets/css/faq.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/payment.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -496,6 +497,28 @@
     </section>
     <!-- <div class="section-box fade-in">Contenido que aparecerá con fade</div> -->
 
+    <section id="payment-section">
+      <div class="container">
+        <div class="payment-content">
+          <h2 class="section-title">Realiza tu Reserva</h2>
+          <p class="section-subtitle">Asegura tu lugar en nuestras experiencias gastronómicas</p>
+          <div class="payment-options">
+            <div class="payment-card">
+              <div class="card-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <h3>Experiencia Completa</h3>
+              <p>Reserva ahora y vive una experiencia gastronómica inolvidable</p>
+              <button id="checkout-button" class="checkout-btn">
+                <span>Pagar ahora</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SECCIÓN: GALERÍA -->
     <section id="gallery-section">
       <!-- Contenedor para el efecto de mariposas -->
@@ -778,6 +801,9 @@
   <script type="module" src="assets/js/butterflies-gallery.js"></script>
   <script type="module" src="assets/js/faq.js"></script>
   <script type="module" src="assets/js/recorridos/sections-filter.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="assets/js/stripe.js"></script>
+  <script src="assets/js/payment-effects.js"></script>
 
 </body>
 

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Pago Exitoso - Cuna de Sabores</title>
+  <link rel="webwide icon" type="png" href="../images/logoPng-picaai.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/restaurante.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body class="contact is-preload">
+  <div id="page-wrapper">
+    <!-- Header -->
+    <header id="header">
+      <!-- Incluir el componente de barra lateral -->
+      <div id="barraLateral-container"></div>
+    </header>
+
+    <!-- Success Section -->
+    <section id="success-section" class="wrapper style1">
+      <div class="container">
+        <div class="success-content">
+          <i class="fas fa-check-circle success-icon"></i>
+          <h2>¡Pago Completado con Éxito!</h2>
+          <p>Gracias por tu reserva. Hemos recibido tu pago y te hemos enviado un correo electrónico con los detalles de tu experiencia.</p>
+          <div class="success-details">
+            <p>Un representante se pondrá en contacto contigo en las próximas 24 horas para confirmar los detalles de tu reserva.</p>
+          </div>
+          <a href="../index.html" class="button primary">Volver al Inicio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <ul class="copyright">
+              <li>&copy; Cuna de Sabores. Todos los derechos reservados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script>
+    // Cargar el componente de barra lateral
+    $(document).ready(function() {
+      $("#barraLateral-container").load("barraLateral.html");
+    });
+  </script>
+</body>
+
+</html>

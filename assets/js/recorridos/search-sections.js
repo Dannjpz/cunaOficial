@@ -15,76 +15,180 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Obtener el input de búsqueda
     const searchInput = form.querySelector('.search-input');
+    // Obtener los inputs de fecha
+    const startDateInput = form.querySelector('[id^="start-date"]');
+    const endDateInput = form.querySelector('[id^="end-date"]');
+    const guestsInput = form.querySelector('[id^="guests-count"]');
+    const searchButton = form.querySelector('.search-button');
+
+    // Función para realizar la búsqueda
+    function performSearch() {
+      // Recopilar datos del formulario
+      const formData = {
+        query: searchInput ? searchInput.value.trim() : '',
+        dateFilterActive: false,
+        guestsFilterActive: false
+      };
+
+      // Verificar si hay fechas seleccionadas
+      if (startDateInput && startDateInput.dataset.userInteracted === 'true' &&
+          endDateInput && endDateInput.dataset.userInteracted === 'true') {
+        formData.dateFilterActive = true;
+        formData.startDate = startDateInput.value;
+        formData.endDate = endDateInput.value;
+      }
+
+      // Verificar si hay huéspedes seleccionados
+      if (guestsInput && guestsInput.dataset.userInteracted === 'true') {
+        formData.guestsFilterActive = true;
+        formData.guests = guestsInput.value;
+      }
+
+      // Realizar la búsqueda
+      if (typeof window.performAdvancedSearch === 'function') {
+        window.performAdvancedSearch(formData);
+      }
+    }
+
+    // Función para mostrar el botón de reset
+    function showResetButton() {
+      if (searchButton) {
+        searchButton.classList.add('reset-mode');
+        searchButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        `;
+        searchButton.setAttribute('title', 'Limpiar filtros');
+      }
+    }
+
+    // Función para mostrar el botón de búsqueda
+    function showSearchButton() {
+      if (searchButton) {
+        searchButton.classList.remove('reset-mode');
+        searchButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        `;
+        searchButton.setAttribute('title', 'Buscar');
+      }
+    }
+
+    // Configurar validación de fechas
+    if (startDateInput) {
+      // Establecer fecha mínima (hoy - 1 día)
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const formattedYesterday = yesterday.toISOString().split('T')[0];
+      startDateInput.setAttribute('min', formattedYesterday);
+      
+      startDateInput.addEventListener('change', function() {
+        this.dataset.userInteracted = 'true';
+        
+        // Establecer fecha mínima para la fecha final
+        if (endDateInput) {
+          endDateInput.setAttribute('min', this.value);
+        }
+        
+        // No realizar búsqueda automática al cambiar la fecha inicial
+        // Solo sincronizar con el otro formulario
+        syncDateInputs(form);
+      });
+    }
+
+    if (endDateInput) {
+      // Establecer fecha máxima (año actual + 1)
+      const maxDate = new Date();
+      maxDate.setFullYear(maxDate.getFullYear() + 1);
+      const formattedMaxDate = maxDate.toISOString().split('T')[0];
+      endDateInput.setAttribute('max', formattedMaxDate);
+      
+      endDateInput.addEventListener('change', function() {
+        this.dataset.userInteracted = 'true';
+        
+        // Realizar búsqueda cuando se selecciona la fecha final
+        if (startDateInput && startDateInput.dataset.userInteracted === 'true') {
+          performSearch();
+          showResetButton();
+        }
+        
+        // Sincronizar con el otro formulario
+        syncDateInputs(form);
+      });
+    }
+
+    // Función para sincronizar fechas entre formularios
+    function syncDateInputs(currentForm) {
+      const isHeader = currentForm.id === 'package-search-form-header';
+      const otherFormId = isHeader ? 'package-search-form-welcome' : 'package-search-form-header';
+      const otherForm = document.getElementById(otherFormId);
+      
+      if (otherForm) {
+        const otherStartDate = otherForm.querySelector('[id^="start-date"]');
+        const otherEndDate = otherForm.querySelector('[id^="end-date"]');
+        
+        if (startDateInput && otherStartDate) {
+          otherStartDate.value = startDateInput.value;
+          otherStartDate.dataset.userInteracted = startDateInput.dataset.userInteracted;
+          if (otherEndDate) {
+            otherEndDate.setAttribute('min', startDateInput.value);
+          }
+        }
+        
+        if (endDateInput && otherEndDate) {
+          otherEndDate.value = endDateInput.value;
+          otherEndDate.dataset.userInteracted = endDateInput.dataset.userInteracted;
+        }
+        
+        // Sincronizar estado del botón de reset
+        const otherSearchButton = otherForm.querySelector('.search-button');
+        if (searchButton && otherSearchButton) {
+          if (searchButton.classList.contains('reset-mode')) {
+            otherSearchButton.classList.add('reset-mode');
+            otherSearchButton.innerHTML = searchButton.innerHTML;
+            otherSearchButton.setAttribute('title', searchButton.getAttribute('title'));
+          } else {
+            otherSearchButton.classList.remove('reset-mode');
+            otherSearchButton.innerHTML = searchButton.innerHTML;
+            otherSearchButton.setAttribute('title', searchButton.getAttribute('title'));
+          }
+        }
+      }
+    }
+
     if (searchInput) {
       // Añadir evento de input para búsqueda en tiempo real
       searchInput.addEventListener('input', function () {
         const query = this.value.trim();
-
-        // Recopilar datos del formulario
-        const formData = {
-          query: query,
-          dateFilterActive: false,
-          guestsFilterActive: false
-        };
-
-        // Verificar si hay fechas seleccionadas
-        const startDateInput = form.querySelector('[id^="start-date"]');
-        const endDateInput = form.querySelector('[id^="end-date"]');
-        if (startDateInput && startDateInput.dataset.userInteracted === 'true' &&
-          endDateInput && endDateInput.dataset.userInteracted === 'true') {
-          formData.dateFilterActive = true;
-          formData.startDate = startDateInput.value;
-          formData.endDate = endDateInput.value;
-        }
-
-        // Verificar si hay huéspedes seleccionados
-        const guestsInput = form.querySelector('[id^="guests-count"]');
-        if (guestsInput && guestsInput.dataset.userInteracted === 'true') {
-          formData.guestsFilterActive = true;
-          formData.guests = guestsInput.value;
-        }
-
-        // Realizar la búsqueda en tiempo real
-        if (typeof window.performAdvancedSearch === 'function') {
-          window.performAdvancedSearch(formData);
-        }
-
+        
+        // Realizar búsqueda en tiempo real solo para el texto
+        performSearch();
+        
         // Mientras se está escribiendo, mantener el botón en modo búsqueda
-        const searchButton = form.querySelector('.search-button');
-        if (searchButton) {
-          // Siempre mostrar como botón de búsqueda mientras se escribe
-          searchButton.classList.remove('reset-mode');
-          searchButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          `;
-          searchButton.setAttribute('title', 'Buscar');
-        }
+        showSearchButton();
       });
 
       // Añadir evento de blur (cuando el usuario quita el foco del campo)
       searchInput.addEventListener('blur', function () {
         const query = this.value.trim();
-        const searchButton = form.querySelector('.search-button');
-
-        if (searchButton && query.length > 0) {
+        
+        if (query.length > 0) {
           // Si hay texto en el campo cuando se quita el foco, cambiar a modo reset
-          searchButton.classList.add('reset-mode');
-          searchButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          `;
-          searchButton.setAttribute('title', 'Limpiar filtros');
+          showResetButton();
+        } else {
+          // Si no hay texto, realizar reset automático
+          showSearchButton();
+          performSearch(); // Esto realizará la búsqueda sin filtro de texto
         }
       });
     }
-
+    
     let currentSection = 0;
 
     // Función para mostrar una sección específica

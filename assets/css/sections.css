@@ -481,12 +481,11 @@
 #hero-section {
     padding: 0;
     padding-top: 120px;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     margin: 0;
     margin-bottom: 50px;
     position: relative;
     background-image: url('/images/back3.png');
-    background-color: var(--color1);
     /* Color de fondo base */
 }
 
