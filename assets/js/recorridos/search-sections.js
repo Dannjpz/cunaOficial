@@ -96,6 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
           endDateInput.setAttribute('min', this.value);
         }
         
+        // Mostrar el botón de reset cuando se selecciona la fecha inicial
+        showResetButton();
+        
         // No realizar búsqueda automática al cambiar la fecha inicial
         // Solo sincronizar con el otro formulario
         syncDateInputs(form);
