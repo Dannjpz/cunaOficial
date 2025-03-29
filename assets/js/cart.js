@@ -8,6 +8,8 @@ initCartTimer();
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM cargado, inicializando carrito...');
+
     // Botones de agregar al carrito
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
     addToCartButtons.forEach(button => {
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevenir el comportamiento predeterminado
             openCartModal(event);
         });
+    } else {
+        console.log('Nota: No se encontró el elemento #cart-icon');
     }
 
     // Icono del carrito en la navegación (añadido)
@@ -30,12 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevenir el comportamiento predeterminado
             openCartModal(event);
         });
+    } else {
+        console.log('Nota: No se encontró el elemento #cart-icon-nav');
     }
 
     // Cerrar modal
     const closeBtn = document.querySelector('.cart-close');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeCartModal);
+    } else {
+        console.log('Nota: No se encontró el elemento .cart-close');
     }
 
     // Cerrar modal al hacer clic fuera
@@ -47,19 +55,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Botón para vaciar carrito
-    const clearCartBtn = document.getElementById('clear-cart-btn');
+    const clearCartBtn = document.querySelector('.clear-cart-btn');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', clearCart);
+    } else {
+        console.log('Nota: No se encontró el elemento .clear-cart-btn');
     }
 
     // Botón para proceder al pago
-    const checkoutBtn = document.getElementById('checkout-cart-btn');
+    const checkoutBtn = document.querySelector('.checkout-cart-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', proceedToCheckout);
+    } else {
+        console.log('Nota: No se encontró el elemento .checkout-cart-btn');
     }
 
     // Renderizar carrito inicial
-    renderCartItems();
+    try {
+        renderCartItems();
+    } catch (error) {
+        console.error('Error al renderizar el carrito inicial:', error);
+    }
 });
 
 // Función para formatear fecha correctamente
@@ -230,267 +246,123 @@ function startCartTimer() {
     updateCartTimer();
 }
 
-// Inicializar el temporizador del carrito
-// Inicializar el temporizador del carrito
+// Función para inicializar el temporizador del carrito
 function initCartTimer() {
-    console.log('Inicializando temporizador del carrito');
-    console.log('Estado actual: cart.length =', cart.length, 'cartTimerStart =', cartTimerStart);
-
-    // Si hay items en el carrito pero no hay temporizador, iniciarlo
-    if (cart.length > 0 && !cartTimerStart) {
-        console.log('Hay items pero no hay temporizador, iniciando...');
-        startCartTimer();
+    // Si no hay tiempo de inicio, establecerlo ahora
+    if (!cartTimerStart) {
+        cartTimerStart = Date.now();
+        localStorage.setItem('cartTimerStart', cartTimerStart);
     }
-    // Si hay temporizador, configurar el intervalo
-    else if (cartTimerStart) {
-        console.log('Hay temporizador existente, configurando intervalo...');
 
-        // Verificar si el temporizador es válido
-        const now = new Date().getTime();
-        const startTime = parseInt(cartTimerStart);
+    // Actualizar el temporizador inmediatamente
+    updateCartTimer();
 
-        if (isNaN(startTime)) {
-            console.log('Error: startTime no es un número válido, reiniciando temporizador');
-            cartTimerStart = now.toString();
-            localStorage.setItem('cartTimerStart', cartTimerStart);
-        }
+    // Configurar intervalo para actualizar el temporizador cada segundo
+    setInterval(updateCartTimer, 1000);
+}
 
-        // Verificar si el temporizador ha expirado
-        const elapsed = now - startTime;
-        const timeLimit = 3 * 60 * 60 * 1000; // 3 horas en milisegundos
+// Función para actualizar el temporizador del carrito
+function updateCartTimer() {
+    try {
+        // Buscar el elemento del temporizador
+        const timerElement = document.getElementById('cart-timer');
 
-        if (elapsed >= timeLimit) {
-            console.log('Temporizador expirado, vaciando carrito');
-            clearCart();
+        if (!timerElement) {
+            console.log('Elemento del temporizador no encontrado');
             return;
         }
 
-        if (window.cartTimerInterval) {
-            clearInterval(window.cartTimerInterval);
-        }
-        window.cartTimerInterval = setInterval(function () {
-            updateCartTimer();
-        }, 1000);
-
-        // Forzar una actualización inmediata
-        const timerElement = document.getElementById('cart-timer');
-        if (timerElement) {
-            const remaining = timeLimit - elapsed;
-            const hours = Math.floor(remaining / (60 * 60 * 1000));
-            const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-            const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
-
-            const formattedHours = String(hours).padStart(2, '0');
-            const formattedMinutes = String(minutes).padStart(2, '0');
-            const formattedSeconds = String(seconds).padStart(2, '0');
-
-            timerElement.innerHTML = `<i class="fas fa-clock"></i> ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-            console.log('Temporizador inicializado con:', `${formattedHours}:${formattedMinutes}:${formattedSeconds}`);
+        // Si el carrito está vacío, ocultar el temporizador
+        if (cart.length === 0) {
+            timerElement.style.display = 'none';
+            return;
         }
 
-        updateCartTimer();
-    }
-    // Si no hay items, reiniciar el temporizador
-    else if (cart.length === 0) {
-        console.log('No hay items, reiniciando temporizador');
-        cartTimerStart = null;
-        localStorage.removeItem('cartTimerStart');
+        // Mostrar el temporizador
+        timerElement.style.display = 'inline-block';
 
-        // Limpiar el intervalo si existe
-        if (window.cartTimerInterval) {
-            clearInterval(window.cartTimerInterval);
-            window.cartTimerInterval = null;
+        // Calcular tiempo transcurrido
+        const now = Date.now();
+        const elapsed = Math.floor((now - cartTimerStart) / 1000);
+        const timeLimit = 30 * 60; // 30 minutos en segundos
+        const remaining = timeLimit - elapsed;
+
+        // Si el tiempo ha expirado, vaciar el carrito
+        if (remaining <= 0) {
+            clearCart();
+            timerElement.innerHTML = '<i class="fas fa-hourglass-end"></i> Tiempo expirado';
+            return;
         }
 
-        // Actualizar la visualización del temporizador
-        const timerElement = document.getElementById('cart-timer');
-        if (timerElement) {
-            timerElement.innerHTML = '<i class="fas fa-clock"></i> 03:00:00';
+        // Formatear el tiempo restante
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        // Actualizar el contenido del temporizador
+        timerElement.innerHTML = `<i class="fas fa-hourglass-half"></i> Reserva por: ${formattedTime}`;
+
+        // Añadir clase de advertencia si queda poco tiempo
+        if (remaining < 300) { // Menos de 5 minutos
+            timerElement.classList.add('cart-timer-warning');
+        } else {
+            timerElement.classList.remove('cart-timer-warning');
         }
+    } catch (error) {
+        console.error('Error al actualizar el temporizador:', error);
     }
 }
 
-// Actualizar el temporizador del carrito
-function updateCartTimer() {
-    // Buscar el elemento del temporizador cada vez que se actualiza
-    // para asegurarnos de que estamos usando el elemento actual
-    const timerElement = document.getElementById('cart-timer');
-    
-    if (!timerElement) {
-        console.log('Elemento del temporizador no encontrado');
-        return;
-    }
-
-    // Si no hay tiempo de inicio, mostrar 3 horas
-    if (!cartTimerStart) {
-        console.log('No hay tiempo de inicio');
-        timerElement.innerHTML = '<i class="fas fa-clock"></i> 03:00:00';
-        return;
-    }
-
-    const now = new Date().getTime();
-    const startTime = parseInt(cartTimerStart);
-
-    if (isNaN(startTime)) {
-        console.log('Error: startTime no es un número válido:', cartTimerStart);
-        return;
-    }
-
-    const elapsed = now - startTime;
-    const timeLimit = 3 * 60 * 60 * 1000; // 3 horas en milisegundos
-    const remaining = timeLimit - elapsed;
-
-    console.log('Tiempo transcurrido:', Math.floor(elapsed / 1000), 'segundos, Tiempo restante:', Math.floor(remaining / 1000), 'segundos');
-
-    if (remaining <= 0) {
-        // Tiempo expirado, vaciar carrito
-        console.log('Tiempo expirado, vaciando carrito');
-        clearCart();
-        timerElement.innerHTML = '<i class="fas fa-clock"></i> Tiempo expirado';
-        return;
-    }
-
-    // Calcular horas, minutos y segundos restantes
-    const hours = Math.floor(remaining / (60 * 60 * 1000));
-    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
-
-    // Formatear con ceros a la izquierda
-    const formattedHours = String(hours).padStart(2, '0');
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(seconds).padStart(2, '0');
-
-    // Actualizar el elemento del temporizador
-    // Usar textContent en lugar de innerHTML para evitar problemas de renderizado
-    const timerContent = `<i class="fas fa-clock"></i> ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-    
-    // Verificar si el contenido ha cambiado antes de actualizar
-    if (timerElement.innerHTML !== timerContent) {
-        timerElement.innerHTML = timerContent;
-        console.log('Temporizador actualizado:', `${formattedHours}:${formattedMinutes}:${formattedSeconds}`);
-    }
-
-    // Añadir clase de advertencia cuando quede poco tiempo
-    if (remaining < 10 * 60 * 1000) { // menos de 10 minutos
-        timerElement.classList.add('cart-timer-warning');
-    } else {
-        timerElement.classList.remove('cart-timer-warning');
-    }
-}
-
-// Función para obtener la fecha actual en formato YYYY-MM-DD
-function getTodayDate() {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-}
-
-// Función para formatear fecha para mostrar
-function formatDate(date) {
-    const day = date.getDate();
-    const month = date.toLocaleString('es', { month: 'short' });
-    return `${day} ${month}`;
-}
-
+// Función para abrir el modal del carrito
 function openCartModal(event) {
     if (event) {
-        event.preventDefault(); // Asegurarse de prevenir el comportamiento predeterminado
+        event.preventDefault();
     }
+
+    console.log('Abriendo modal del carrito');
+
     const modal = document.getElementById('cart-modal');
-    if (modal) {
+    if (!modal) {
+        console.error('Error: No se encontró el modal del carrito (#cart-modal)');
+        return;
+    }
+
+    try {
+        // Renderizar los items del carrito
         renderCartItems();
 
-        // Primero, eliminar cualquier temporizador existente para evitar duplicados
-        const existingTimer = document.getElementById('cart-timer');
-        if (existingTimer) {
-            existingTimer.remove();
-        }
+        // Asegurarse de que existe el contenedor del temporizador
+        let timerContainer = modal.querySelector('.cart-timer-container');
+        if (!timerContainer) {
+            timerContainer = document.createElement('div');
+            timerContainer.className = 'cart-timer-container';
 
-        // Buscar el lugar adecuado para insertar el temporizador
-        let insertLocation = null;
-        
-        // Buscar el encabezado del modal o el título
-        const modalHeader = modal.querySelector('.cart-modal-header');
-        const modalTitle = modal.querySelector('.cart-modal-title, h2');
-        
-        if (modalHeader) {
-            insertLocation = modalHeader;
-            console.log('Insertando temporizador en el encabezado del modal');
-        } else if (modalTitle) {
-            // Crear un contenedor después del título
-            const timerContainer = document.createElement('div');
-            timerContainer.className = 'cart-timer-container';
-            modalTitle.parentNode.insertBefore(timerContainer, modalTitle.nextSibling);
-            insertLocation = timerContainer;
-            console.log('Insertando temporizador después del título');
-        } else {
-            // Si no hay encabezado ni título, insertar al principio del modal
-            const timerContainer = document.createElement('div');
-            timerContainer.className = 'cart-timer-container';
-            modal.insertBefore(timerContainer, modal.firstChild);
-            insertLocation = timerContainer;
-            console.log('Insertando temporizador al principio del modal');
-        }
-        
-        // Crear el elemento del temporizador
-        const timerElement = document.createElement('div');
-        timerElement.id = 'cart-timer';
-        timerElement.className = 'cart-timer';
-        
-        // Establecer el valor inicial del temporizador
-        if (cart.length > 0 && cartTimerStart) {
-            const now = new Date().getTime();
-            const startTime = parseInt(cartTimerStart);
-            
-            if (!isNaN(startTime)) {
-                const elapsed = now - startTime;
-                const timeLimit = 3 * 60 * 60 * 1000; // 3 horas en milisegundos
-                const remaining = timeLimit - elapsed;
-                
-                if (remaining > 0) {
-                    // Calcular horas, minutos y segundos restantes
-                    const hours = Math.floor(remaining / (60 * 60 * 1000));
-                    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-                    const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
-                    
-                    // Formatear con ceros a la izquierda
-                    const formattedHours = String(hours).padStart(2, '0');
-                    const formattedMinutes = String(minutes).padStart(2, '0');
-                    const formattedSeconds = String(seconds).padStart(2, '0');
-                    
-                    timerElement.innerHTML = `<i class="fas fa-clock"></i> ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-                    console.log('Temporizador creado con tiempo restante:', `${formattedHours}:${formattedMinutes}:${formattedSeconds}`);
-                    
-                    // Añadir clase de advertencia cuando quede poco tiempo
-                    if (remaining < 10 * 60 * 1000) { // menos de 10 minutos
-                        timerElement.classList.add('cart-timer-warning');
-                    }
-                } else {
-                    timerElement.innerHTML = '<i class="fas fa-clock"></i> Tiempo expirado';
-                }
+            // Insertar después del encabezado
+            const headerEl = modal.querySelector('.cart-header');
+            if (headerEl && headerEl.nextSibling) {
+                headerEl.parentNode.insertBefore(timerContainer, headerEl.nextSibling);
             } else {
-                timerElement.innerHTML = '<i class="fas fa-clock"></i> 03:00:00';
+                // Si no hay encabezado, insertar al principio del contenido
+                const contentEl = modal.querySelector('.cart-content');
+                if (contentEl) {
+                    contentEl.insertBefore(timerContainer, contentEl.firstChild);
+                }
             }
-        } else {
-            timerElement.innerHTML = '<i class="fas fa-clock"></i> 03:00:00';
-        }
-        
-        // Insertar el temporizador en la ubicación determinada
-        insertLocation.appendChild(timerElement);
-        
-        // Asegurarse de que el temporizador se actualice
-        if (cart.length > 0) {
-            if (!cartTimerStart) {
-                startCartTimer();
-            } else if (!window.cartTimerInterval) {
-                window.cartTimerInterval = setInterval(function () {
-                    updateCartTimer();
-                }, 1000);
-            }
-            
-            // Forzar una actualización inmediata del temporizador
-            updateCartTimer();
         }
 
+        // Crear o actualizar el elemento del temporizador
+        let timerElement = document.getElementById('cart-timer');
+        if (!timerElement) {
+            timerElement = document.createElement('div');
+            timerElement.id = 'cart-timer';
+            timerElement.className = 'cart-timer';
+            timerContainer.appendChild(timerElement);
+        }
+
+        // Actualizar el temporizador
+        updateCartTimer();
+
+        // Mostrar el modal
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Prevenir scroll
 
@@ -498,6 +370,9 @@ function openCartModal(event) {
         setTimeout(() => {
             modal.classList.add('show');
         }, 10);
+    } catch (error) {
+        console.error('Error al abrir el modal del carrito:', error);
+        alert('Hubo un error al abrir el carrito. Por favor, intenta de nuevo.');
     }
 }
 
@@ -512,82 +387,92 @@ function closeCartModal() {
 
 // Función para renderizar los items del carrito
 function renderCartItems() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    if (!cartItemsContainer) return;
+    console.log('Renderizando items del carrito');
 
-    // Limpiar contenedor
+    // Obtener el contenedor de items
+    const cartItemsContainer = document.getElementById('cart-items');
+    if (!cartItemsContainer) {
+        console.error('Error: No se encontró el contenedor de items del carrito (#cart-items)');
+        return;
+    }
+
+    // Limpiar el contenedor
     cartItemsContainer.innerHTML = '';
 
-    // Si el carrito está vacío
+    // Si el carrito está vacío, mostrar mensaje
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = `
-            <div class="empty-cart-message">
+            <div class="empty-cart">
                 <i class="fas fa-shopping-cart"></i>
                 <p>Tu carrito está vacío</p>
             </div>
         `;
-        document.getElementById('cart-total-amount').textContent = '$0 MXN';
 
-        // Ocultar botones de acción si el carrito está vacío
-        const cartActionButtons = document.querySelector('.cart-action-buttons');
-        if (cartActionButtons) {
-            cartActionButtons.style.display = 'none';
+        // Actualizar el total
+        const totalElement = document.getElementById('cart-total-price');
+        if (totalElement) {
+            totalElement.textContent = '$0.00';
         }
+
         return;
     }
 
-    // Calcular total
+    // Calcular el total
     let total = 0;
 
     // Renderizar cada item
     cart.forEach((item, index) => {
-        const itemTotal = item.price;
-        total += itemTotal;
+        total += item.price * item.guests;
 
         const itemElement = document.createElement('div');
         itemElement.className = 'cart-item';
         itemElement.innerHTML = `
             <div class="cart-item-info">
-                <div class="cart-item-title">${item.name}</div>
-                <div class="cart-item-price">$${itemTotal.toFixed(2)} MXN</div>
-                <div class="cart-item-guests">${item.guests} personas</div>
-                ${item.date ? `<div class="cart-item-date">Fecha: ${item.date}</div>` : ''}
+                <h3>${item.name}</h3>
+                <p>Fecha: ${item.date || 'No especificada'}</p>
+                <p>Personas: ${item.guests}</p>
+                <p>Precio: $${item.price.toFixed(2)} MXN</p>
             </div>
             <div class="cart-item-actions">
-                <button class="cart-item-edit-btn" data-index="${index}">
-                    <i class="fas fa-edit"></i> Editar
+                <button class="edit-item-btn" data-index="${index}">
+                    <i class="fas fa-edit"></i>
                 </button>
-                <button class="cart-item-remove-btn" data-index="${index}">
-                    <i class="fas fa-trash-alt"></i>
+                <button class="remove-item-btn" data-index="${index}">
+                    <i class="fas fa-trash"></i>
                 </button>
             </div>
         `;
 
         cartItemsContainer.appendChild(itemElement);
-
-        // Agregar evento para eliminar item
-        const removeBtn = itemElement.querySelector('.cart-item-remove-btn');
-        removeBtn.addEventListener('click', function () {
-            removeCartItem(index);
-        });
-
-        // Agregar evento para editar item
-        const editBtn = itemElement.querySelector('.cart-item-edit-btn');
-        if (editBtn) {
-            editBtn.addEventListener('click', function () {
-                openEditModal(index);
-            });
-        }
     });
 
-    // Actualizar total
-    document.getElementById('cart-total-amount').textContent = `$${total.toFixed(2)} MXN`;
-
-    // Mostrar botones de acción si hay items en el carrito
-    const cartActionButtons = document.querySelector('.cart-action-buttons');
-    if (cartActionButtons) {
-        cartActionButtons.style.display = 'flex';
+    // Actualizar el total
+    const totalElement = document.getElementById('cart-total-price');
+    if (totalElement) {
+        totalElement.textContent = `$${total.toFixed(2)} MXN`;
+    } else {
+        console.error('Error: No se encontró el elemento del total (#cart-total-price)');
     }
+
+    // Agregar event listeners a los botones de editar y eliminar
+    const editButtons = document.querySelectorAll('.edit-item-btn');
+    const removeButtons = document.querySelectorAll('.remove-item-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('data-index'));
+            openEditModal(index);
+        });
+    });
+
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('data-index'));
+            if (confirm('¿Estás seguro de que deseas eliminar este item?')) {
+                removeCartItem(index);
+            }
+        });
+    });
 }
 
 // Función para abrir el modal de edición
@@ -761,14 +646,97 @@ function clearCart() {
 }
 
 // Función para proceder al pago
+// Función para proceder al pago
 function proceedToCheckout() {
     if (cart.length === 0) {
         alert('Tu carrito está vacío');
         return;
     }
 
-    // Aquí puedes redirigir a la página de pago o mostrar otra modal
-    window.location.href = '/components/payment.html';
+    // Mostrar estado de carga en el botón
+    const checkoutButton = document.querySelector('.checkout-cart-btn');
+    if (!checkoutButton) {
+        console.error('No se encontró el botón de checkout');
+        return;
+    }
+
+    const originalText = checkoutButton.innerHTML;
+    checkoutButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+    checkoutButton.disabled = true;
+
+    try {
+        // Calcular el total del carrito
+        const cartTotal = cart.reduce((total, item) => total + (item.price * item.guests), 0);
+        console.log('Total del carrito a cobrar:', cartTotal);
+
+        // Usar la misma URL del servidor que en stripe.js
+        const serverUrl = "http://localhost:3000";
+        console.log(`Enviando solicitud de pago a ${serverUrl}/crear-sesion-pago`);
+
+        // Crear un resumen de los items del carrito para la descripción
+        const itemsSummary = cart.map(item =>
+            `${item.name} (${item.guests} personas)`
+        ).join(', ');
+
+        // Hacer la solicitud para crear una sesión de pago
+        fetch(`${serverUrl}/crear-sesion-pago`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                productName: "Paquetes Cuna de Sabores",
+                description: itemsSummary,
+                amount: Math.round(cartTotal * 100), // Convertir a centavos para Stripe
+                quantity: 1,
+                successUrl: `${window.location.origin}/components/success.html`,
+                cancelUrl: `${window.location.origin}/components/cancel.html`
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del servidor: ${response.status} - ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(session => {
+                console.log("Sesión de pago creada:", session);
+                // Redirigir a la página de pago de Stripe
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(result => {
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error al procesar el pago:", error);
+                alert("Hubo un error al procesar tu pago. Por favor, intenta de nuevo.");
+                // Restaurar el botón
+                checkoutButton.innerHTML = originalText;
+                checkoutButton.disabled = false;
+            });
+    } catch (error) {
+        console.error("Error al preparar el pago:", error);
+        alert("Hubo un error al preparar tu pago. Por favor, intenta de nuevo.");
+        // Restaurar el botón
+        checkoutButton.innerHTML = originalText;
+        checkoutButton.disabled = false;
+    }
+}
+
+function redirectToWhatsApp() {
+    // Número de teléfono (incluir código de país sin el +)
+    const phoneNumber = "5217971314809"; // Reemplaza con el número correcto (797-131-4809 con código de México)
+
+    // Mensaje predefinido (debe estar codificado para URL)
+    const message = encodeURIComponent("Me gustaría recibir orientación para hacer la reservación de mi paquete de viaje");
+
+    // Crear la URL de WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(whatsappURL, '_blank');
 }
 
 // Agregar estilos para el mensaje de confirmación y el temporizador
@@ -850,3 +818,28 @@ style.textContent = `
 }
 `;
 document.head.appendChild(style);
+
+// Inicializar Stripe (asegúrate de que el script de Stripe esté cargado)
+document.addEventListener('DOMContentLoaded', function () {
+    // Verificar si Stripe ya está definido globalmente
+    if (typeof stripe === 'undefined' && typeof Stripe !== 'undefined') {
+        // Solo definir stripe si no existe ya
+        window.stripe = Stripe("pk_test_51R7T02BgNkeedNhqYOkFSgPQScP44f2vXamBXFcBdaybvR8rngwdW5lQoXFDEWzwr0rKmgEDFZhoSt0Gg5CMpWYs00XHLgs4Zo");
+    } else if (typeof stripe === 'undefined' && typeof Stripe === 'undefined') {
+        console.error("Stripe no está definido. Asegúrate de incluir el script de Stripe.");
+    }
+
+    // Agregar event listener para el botón de pago en el carrito
+    const checkoutCartBtn = document.querySelector('.checkout-cart-btn');
+    if (checkoutCartBtn) {
+        checkoutCartBtn.addEventListener('click', proceedToCheckout);
+    }
+
+    // Agregar event listener para el botón de WhatsApp
+    const whatsappHelpBtn = document.querySelector('.whatsapp-help-btn');
+    if (whatsappHelpBtn) {
+        whatsappHelpBtn.addEventListener('click', redirectToWhatsApp);
+    } else {
+        console.log('Nota: No se encontró el botón de WhatsApp');
+    }
+});

@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="assets/css/payment.css" />
   <link rel="stylesheet" href="assets/css/cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="assets/js/stripe.js"></script>
 </head>
 
 <body>
@@ -551,7 +553,7 @@
     </section>
     <!-- <div class="section-box fade-in">Contenido que aparecerá con fade</div> -->
 
-    <section id="payment-section">
+    <!-- <section id="payment-section">
       <div class="container">
         <div class="payment-content">
           <h2 class="section-title">Realiza tu Reserva</h2>
@@ -571,7 +573,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- SECCIÓN: GALERÍA -->
     <section id="gallery-section">
@@ -835,6 +837,7 @@
     </section>
 
     <!-- Modificar el modal del carrito para añadir los nuevos botones -->
+    <!-- Add this right before the closing </body> tag if it doesn't exist already -->
     <!-- Modal del carrito -->
     <div id="cart-modal" class="cart-modal">
       <div class="cart-content">
@@ -842,20 +845,20 @@
           <h2>Tu Carrito</h2>
           <span class="cart-close">&times;</span>
         </div>
+        <!-- The timer container will be inserted here by JavaScript -->
         <div id="cart-items" class="cart-items">
           <!-- Los items del carrito se cargarán dinámicamente aquí -->
         </div>
         <div class="cart-footer">
           <div class="cart-total">
             <span>Total:</span>
-            <span id="cart-total-amount">$0 MXN</span>
+            <span id="cart-total-price">$0.00</span>
           </div>
-          <div class="cart-action-buttons">
-            <button id="clear-cart-btn" class="cart-action-btn clear-cart">
-              <i class="fas fa-trash"></i> Vaciar carrito
-            </button>
-            <button id="checkout-cart-btn" class="cart-action-btn checkout">
-              <i class="fas fa-shopping-bag"></i> Proceder al pago
+          <div class="cart-actions">
+            <button class="clear-cart-btn">Vaciar Carrito</button>
+            <button class="checkout-cart-btn">Proceder al Pago</button>
+            <button class="whatsapp-help-btn">
+              <i class="fab fa-whatsapp"></i> Solicitar Asesoría
             </button>
           </div>
         </div>
@@ -882,12 +885,11 @@
   <script type="module" src="assets/js/butterflies-gallery.js"></script>
   <script type="module" src="assets/js/faq.js"></script>
   <script type="module" src="assets/js/recorridos/sections-filter.js"></script>
-  <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/stripe.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/payment-effects.js"></script>
   <script src="assets/js/cart.js" defer></script>
   <script src="assets/js/package-customizer.js"></script>
-
   <!-- Añadir los event listeners para los nuevos botones al final del body -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
