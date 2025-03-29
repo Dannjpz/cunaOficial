@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="assets/css/faq.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/payment.css" />
+  <link rel="stylesheet" href="assets/css/cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -41,13 +42,6 @@
               <span class="date-separator">-</span>
               <input type="date" class="search-date" id="end-date-header" placeholder="Fecha final">
             </div>
-            <div class="search-section" data-section="personas">
-              <input type="text" class="search-guests" id="guests-count-welcome" placeholder="Invitados" readonly
-                value="2">
-              <div class="guests-dropdown" id="guests-dropdown-welcome">
-                <!-- Las opciones se generarán dinámicamente con JavaScript -->
-              </div>
-            </div>
           </div>
           <button type="submit" class="search-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -60,9 +54,14 @@
       </div>
       <nav class="header-nav">
         <ul>
+          <li class="cart-icon-container">
+            <a href="javascript:void(0)" id="cart-icon-nav">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-counter-nav">0</span>
+            </a>
+          </li>
           <li><a href="/components/restaurante.html">Restaurante</a></li>
           <li><a href="/components/reservar.html">Reservar</a></li>
-          <li><a href="/components/contacto.html">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -80,7 +79,9 @@
         </video>
         <div class="welcome-video-overlay"></div>
       </div>
-      <h1 class="welcome-title welcome-title-outside fade-in">Bienvenidos a Cuna de Sabores</h1>
+      <div class="welcome-header">
+        <h1 class="welcome-title welcome-title-outside fade-in">Bienvenidos a Cuna de Sabores</h1>
+      </div>
       <p class="welcome-text welcome-text-outside fade-in">Descubre la auténtica experiencia gastronómica y cultural
         mexicana.</p>
       <div class="welcome-container">
@@ -97,13 +98,6 @@
                 <input type="date" class="search-date" id="start-date-welcome" placeholder="Fecha inicio">
                 <span class="date-separator">-</span>
                 <input type="date" class="search-date" id="end-date-welcome" placeholder="Fecha final">
-              </div>
-              <div class="search-section" data-section="personas">
-                <input type="text" class="search-guests" id="guests-count-header" placeholder="Invitados" readonly
-                  value="2">
-                <div class="guests-dropdown" id="guests-dropdown-header">
-                  <!-- Las opciones se generarán dinámicamente con JavaScript -->
-                </div>
               </div>
             </div>
             <button type="submit" class="search-button">
@@ -144,8 +138,8 @@
 
         <div class="cont__inner">
           <!-- Paquete 1 -->
-          <div class="el" data-package-tags="cultural gastronómico tradicional" data-departure-dates="2025-12-20"
-            data-max-guests="10" data-min-guests="1">
+          <div class="el" data-package-id="1" data-package-tags="cultural gastronómico tradicional"
+            data-departure-dates="2025-12-20" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -159,11 +153,17 @@
                       por los mejores restaurantes locales.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
-                      <span class="package-price">$1,500 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $1,500 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 20 Dic</span>
                     </div>
-                    <a href="/components/paquetes.html#gastronomico" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="1" data-package-name="Experiencia Gastronómica"
+                        data-package-price="1500">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#gastronomico" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -178,8 +178,8 @@
           </div>
 
           <!-- Paquete 2 -->
-          <div class="el" data-package-tags="aventura naturaleza ecoturismo" data-departure-dates="2025-11-12"
-            data-max-guests="8" data-min-guests="1">
+          <div class="el" data-package-id="2" data-package-tags="aventura naturaleza ecoturismo"
+            data-departure-dates="2025-11-12" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -193,11 +193,17 @@
                       observación de flora y fauna.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
-                      <span class="package-price">$1,200 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $1,200 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 12 Nov</span>
                     </div>
-                    <a href="/components/paquetes.html#aventura" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="2" data-package-name="Aventura en la Naturaleza"
+                        data-package-price="1200">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#aventura" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -212,8 +218,8 @@
           </div>
 
           <!-- Paquete 3 -->
-          <div class="el" data-package-tags="cultural histórico tradicional" data-departure-dates="2025-10-07"
-            data-max-guests="15" data-min-guests="1">
+          <div class="el" data-package-id="3" data-package-tags="cultural histórico tradicional"
+            data-departure-dates="2025-10-07" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -227,11 +233,17 @@
                       tradicional.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
-                      <span class="package-price">$1,800 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $1,800 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-15 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 07 Jul</span>
                     </div>
-                    <a href="/components/paquetes.html#cultural" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="3" data-package-name="Ruta Cultural"
+                        data-package-price="1800">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#cultural" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -246,8 +258,8 @@
           </div>
 
           <!-- Paquete 4 -->
-          <div class="el" data-package-tags="familiar relajación spa" data-departure-dates="2025-09-16"
-            data-max-guests="12" data-min-guests="1">
+          <div class="el" data-package-id="4" data-package-tags="familiar relajación spa"
+            data-departure-dates="2025-09-16" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -261,11 +273,17 @@
                       guiadas y tiempo de relajación.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
-                      <span class="package-price">$2,200 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $2,200 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 16 sep</span>
                     </div>
-                    <a href="/components/paquetes.html#familiar" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="4" data-package-name="Escapada Familiar"
+                        data-package-price="2200">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#familiar" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -280,8 +298,8 @@
           </div>
 
           <!-- Paquete 5 -->
-          <div class="el" data-package-tags="viñedos enología gastronómico" data-departure-dates="2025-08-05"
-            data-max-guests="10" data-min-guests="1">
+          <div class="el" data-package-id="5" data-package-tags="viñedos enología gastronómico"
+            data-departure-dates="2025-08-05" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -295,12 +313,18 @@
                       elaboración del vino y disfruta de catas exclusivas.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 2 días</span>
-                      <span class="package-price">$1,800 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $1,800 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-10 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 05
                         agost</span>
                     </div>
-                    <a href="/components/paquetes.html#vinedos" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="5" data-package-name="Ruta de Viñedos"
+                        data-package-price="1800">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#vinedos" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -315,8 +339,8 @@
           </div>
 
           <!-- Paquete 6 (NUEVO) -->
-          <div class="el" data-package-tags="talleres culinarios gastronómico tradicional"
-            data-departure-dates="2025-07-22" data-max-guests="8" data-min-guests="1">
+          <div class="el" data-package-id="6" data-package-tags="talleres culinarios gastronómico tradicional"
+            data-departure-dates="2025-07-22" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -330,11 +354,17 @@
                       regional.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 1 día</span>
-                      <span class="package-price">$950 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $950 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-8 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 22 Jul</span>
                     </div>
-                    <a href="/components/paquetes.html#talleres" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="6" data-package-name="Talleres Culinarios"
+                        data-package-price="950">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#talleres" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -349,7 +379,7 @@
           </div>
 
           <!-- Paquete 7 (NUEVO) -->
-          <div class="el" data-package-tags="recorridos históricos cultural tradicional"
+          <div class="el" data-package-id="7" data-package-tags="recorridos históricos cultural tradicional"
             data-departure-dates="2025-06-10" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
@@ -364,11 +394,17 @@
                       mágicos y centros históricos.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 5 días</span>
-                      <span class="package-price">$2,500 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $2,500 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-20 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 10 jun</span>
                     </div>
-                    <a href="/components/paquetes.html#historicos" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="7" data-package-name="Recorridos Históricos"
+                        data-package-price="2500">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#historicos" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -383,8 +419,8 @@
           </div>
 
           <!-- Paquete 8 (NUEVO) -->
-          <div class="el" data-package-tags="gastronomía mexicana tradicional regional"
-            data-departure-dates="2025-05-20" data-max-guests="12" data-min-guests="1">
+          <div class="el" data-package-id="8" data-package-tags="gastronomía mexicana tradicional regional"
+            data-departure-dates="2025-05-20" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -398,11 +434,17 @@
                       hasta Baja California.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 4 días</span>
-                      <span class="package-price">$2,100 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $2,100 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-12 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 20 mayo</span>
                     </div>
-                    <a href="/components/paquetes.html#regional" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="8" data-package-name="Gastronomía Regional"
+                        data-package-price="2100">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#regional" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -417,8 +459,8 @@
           </div>
 
           <!-- Paquete 9 (NUEVO) -->
-          <div class="el" data-package-tags="mercados locales artesanías tradicional" data-departure-dates="2025-04-15"
-            data-max-guests="15" data-min-guests="1">
+          <div class="el" data-package-id="9" data-package-tags="mercados locales artesanías tradicional"
+            data-departure-dates="2025-04-15" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -432,11 +474,17 @@
                       vivas las técnicas ancestrales.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 3 días</span>
-                      <span class="package-price">$1,750 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $1,750 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-15 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 15 abr</span>
                     </div>
-                    <a href="/components/paquetes.html#mercados" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="9" data-package-name="Mercados y Artesanías"
+                        data-package-price="1750">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#mercados" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -451,8 +499,8 @@
           </div>
 
           <!-- Paquete 10 (NUEVO) -->
-          <div class="el" data-package-tags="festivales tradiciones cultural" data-departure-dates="2025-03-28"
-            data-max-guests="25" data-min-guests="1">
+          <div class="el" data-package-id="10" data-package-tags="festivales tradiciones cultural"
+            data-departure-dates="2025-03-28" data-max-guests="20" data-min-guests="1">
             <div class="el__overflow">
               <div class="el__inner">
                 <div class="el__bg"></div>
@@ -466,11 +514,17 @@
                       o el Carnaval.</p>
                     <div class="package-details">
                       <span class="package-duration"><i class="fas fa-clock"></i> 5 días</span>
-                      <span class="package-price">$2,800 MXN</span>
+                      <span class="package-price"><i class="fas fa-tag"></i> $2,800 MXN</span>
                       <span class="package-availability"><i class="fas fa-users"></i> 1-25 personas</span>
                       <span class="package-next-date"><i class="fas fa-calendar-alt"></i> Próxima salida: 28 mar</span>
                     </div>
-                    <a href="/components/paquetes.html#festivales" class="package-button">Reservar</a>
+                    <div class="package-buttons">
+                      <button class="add-to-cart-btn" data-package-id="10" data-package-name="Festivales y Tradiciones"
+                        data-package-price="2800">
+                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                      </button>
+                      <a href="/components/paquetes.html#festivales" class="package-button">Reservar</a>
+                    </div>
                   </div>
                   <div class="el__close-btn"></div>
                 </div>
@@ -780,6 +834,33 @@
       </footer>
     </section>
 
+    <!-- Modificar el modal del carrito para añadir los nuevos botones -->
+    <!-- Modal del carrito -->
+    <div id="cart-modal" class="cart-modal">
+      <div class="cart-content">
+        <div class="cart-header">
+          <h2>Tu Carrito</h2>
+          <span class="cart-close">&times;</span>
+        </div>
+        <div id="cart-items" class="cart-items">
+          <!-- Los items del carrito se cargarán dinámicamente aquí -->
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-amount">$0 MXN</span>
+          </div>
+          <div class="cart-action-buttons">
+            <button id="clear-cart-btn" class="cart-action-btn clear-cart">
+              <i class="fas fa-trash"></i> Vaciar carrito
+            </button>
+            <button id="checkout-cart-btn" class="cart-action-btn checkout">
+              <i class="fas fa-shopping-bag"></i> Proceder al pago
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -804,7 +885,21 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/stripe.js"></script>
   <script src="assets/js/payment-effects.js"></script>
+  <script src="assets/js/cart.js" defer></script>
+  <script src="assets/js/package-customizer.js"></script>
 
+  <!-- Añadir los event listeners para los nuevos botones al final del body -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Event listener para el botón de proceder al pago en el carrito
+      const proceedPaymentBtn = document.querySelector('.proceed-payment-cart-btn');
+      if (proceedPaymentBtn) {
+        proceedPaymentBtn.addEventListener('click', function () {
+          window.location.href = '/components/payment.html';
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
