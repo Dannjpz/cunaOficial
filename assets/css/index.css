@@ -1172,9 +1172,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 #social-section {
   position: relative;
-  margin: 0;  /* Eliminar cualquier margen */
-  padding: 0; /* Eliminar cualquier padding */
-  background: transparent; /* Hacer el fondo transparente */
+  margin: 0;
+  /* Eliminar cualquier margen */
+  padding: 0;
+  /* Eliminar cualquier padding */
+  background: transparent;
+  /* Hacer el fondo transparente */
   height: auto;
   min-height: 0;
 }
@@ -1338,7 +1341,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .package-details {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: var(--text-color-light);
@@ -1522,7 +1525,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .date-picker-container:last-child .search-date {
-  text-align: right;
+  text-align: center;
   padding-left: 0;
 }
 
