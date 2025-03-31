@@ -111,7 +111,7 @@
 }
 
 .cart-content {
-  background-color: var(--color6);
+  background-image: url(/images/back3.png);
   margin: 5% auto;
   padding: 25px;
   border-radius: 15px;
@@ -139,7 +139,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7); /* Cambiado a blanco semitransparente */
   padding-bottom: 15px;
 }
 
@@ -150,26 +150,52 @@
   font-size: 1.8rem;
 }
 
+.cart-close {
+  font-size: 6rem;
+  /* Aumentado de tamaño */
+  color: var(--colorFondoContraste);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.cart-close:hover {
+  color: var(--color1);
+  transform: scale(1.1);
+}
+
+
 /* Temporizador del carrito */
 .cart-timer {
   position: absolute;
-  top: 20px;
-  right: 60px;
-  background-color: rgba(255, 255, 255, 0.9);
+  top: 30px;
+  right: 100px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px) translateZ(10px) translateX(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 8px 12px;
   border-radius: 20px;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+
 .cart-timer i {
   font-size: 1.1rem;
+  color: rgb(255, 255, 255);
 }
+
 
 .cart-timer-warning {
   color: #e74c3c;
@@ -193,10 +219,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--color1);
   padding: 15px;
   margin-bottom: 12px;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -496,24 +522,6 @@
   background-color: #e0e0e0;
 }
 
-/* Estilos para el botón de WhatsApp */
-.whatsapp-help-btn {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 10px;
-  width: 100%;
-}
-
 .whatsapp-help-btn i {
   font-size: 1.2rem;
 }
@@ -523,12 +531,53 @@
   transform: translateY(-2px);
 }
 
-/* Ajustar el layout de los botones en el carrito */
+.cart-footer {
+  margin-top: 20px;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--color1);
+}
+
 .cart-actions {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  gap: 20px;
   width: 100%;
+}
+
+.cart-actions button {
+  width: 100%;
+  /* Hacer que cada botón ocupe todo el ancho */
+  padding: 12px 15px;
+  /* Aumentar el padding para botones más grandes */
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.checkout-btn {
+  background-color: var(--color1);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: var(--color2);
+  transform: translateY(-2px);
 }
 
 .clear-cart-btn,
@@ -646,6 +695,10 @@
   display: none;
   margin-top: 5px;
   padding: 15px;
+}
+
+.cart-timer-container{
+  border-color: antiquewhite;
 }
 
 /* Estilo para el input de fecha */
@@ -851,7 +904,8 @@
 
 .custom-date-container .search-date {
   width: 100%;
-  padding: 10px 0px 10px 0px; /* Eliminado el padding horizontal */
+  padding: 10px 0px 10px 0px;
+  /* Eliminado el padding horizontal */
   border-radius: 5px;
   font-size: 1.2rem;
   color: var(--text-color-contraste);
@@ -862,7 +916,8 @@
   overflow: hidden;
   box-sizing: border-box;
   min-width: 150px;
-  text-align: left; /* Centrar el texto */
+  text-align: left;
+  /* Centrar el texto */
 }
 
 .date-picker-container {
@@ -880,7 +935,6 @@
   top: -275px;
   left: 175px;
   width: 300px;
-  /* background: var(--color1); */
   color: white;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

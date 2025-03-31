@@ -55,19 +55,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Botón para vaciar carrito
-    const clearCartBtn = document.querySelector('.clear-cart-btn');
+    const clearCartBtn = document.getElementById('checkout-button-2');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', clearCart);
     } else {
-        console.log('Nota: No se encontró el elemento .clear-cart-btn');
+        console.log('Nota: No se encontró el elemento #checkout-button-2');
     }
 
     // Botón para proceder al pago
-    const checkoutBtn = document.querySelector('.checkout-cart-btn');
+    const checkoutBtn = document.getElementById('checkout-button-1');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', proceedToCheckout);
     } else {
-        console.log('Nota: No se encontró el elemento .checkout-cart-btn');
+        console.log('Nota: No se encontró el elemento #checkout-button-1');
     }
 
     // Renderizar carrito inicial
@@ -646,7 +646,6 @@ function clearCart() {
 }
 
 // Función para proceder al pago
-// Función para proceder al pago
 function proceedToCheckout() {
     if (cart.length === 0) {
         alert('Tu carrito está vacío');
@@ -654,7 +653,7 @@ function proceedToCheckout() {
     }
 
     // Mostrar estado de carga en el botón
-    const checkoutButton = document.querySelector('.checkout-cart-btn');
+    const checkoutButton = document.getElementById('checkout-button-1');
     if (!checkoutButton) {
         console.error('No se encontró el botón de checkout');
         return;
@@ -739,86 +738,6 @@ function redirectToWhatsApp() {
     window.open(whatsappURL, '_blank');
 }
 
-// Agregar estilos para el mensaje de confirmación y el temporizador
-const style = document.createElement('style');
-style.textContent = `
-.cart-message {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.cart-message.show {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.cart-message-content {
-    background-color: #4caf50;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.cart-message-content i {
-    margin-right: 10px;
-    font-size: 1.2rem;
-}
-
-.cart-message-content p {
-    margin: 0;
-}
-
-.cart-timer-container {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-    width: 100%;
-}
-
-.cart-timer {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #333;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: 1px solid #ddd;
-    min-width: 150px;
-    position: relative;
-    z-index: 1000;
-}
-
-.cart-timer i {
-    margin-right: 8px;
-    color: #666;
-}
-
-.cart-timer-warning {
-    color: #dc3545;
-    animation: pulse 1s infinite;
-    background-color: #fff3f3;
-    border-color: #ffcccb;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-`;
-document.head.appendChild(style);
-
 // Inicializar Stripe (asegúrate de que el script de Stripe esté cargado)
 document.addEventListener('DOMContentLoaded', function () {
     // Verificar si Stripe ya está definido globalmente
@@ -830,16 +749,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Agregar event listener para el botón de pago en el carrito
-    const checkoutCartBtn = document.querySelector('.checkout-cart-btn');
+    const checkoutCartBtn = document.getElementById('checkout-button-1');
     if (checkoutCartBtn) {
         checkoutCartBtn.addEventListener('click', proceedToCheckout);
+    } else {
+        console.log('Nota: No se encontró el elemento #checkout-button-1');
     }
 
     // Agregar event listener para el botón de WhatsApp
-    const whatsappHelpBtn = document.querySelector('.whatsapp-help-btn');
-    if (whatsappHelpBtn) {
-        whatsappHelpBtn.addEventListener('click', redirectToWhatsApp);
+    const whatsappBtn = document.getElementById('checkout-button-3');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function () {
+            const phoneNumber = '5217971314809';
+            const message = 'Hola, me gustaría recibir asesoría sobre los paquetes de Cuna de Sabores.';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
     } else {
-        console.log('Nota: No se encontró el botón de WhatsApp');
+        console.log('Nota: No se encontró el elemento #checkout-button-3');
     }
 });

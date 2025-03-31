@@ -69,7 +69,6 @@
     </div>
   </header>
 
-
   <div class="container">
     <!-- SECCIÓN: BIENVENIDA Y BUSCADOR -->
     <section id="welcome-section">
@@ -114,14 +113,56 @@
       </div>
     </section>
 
+    <section id="payment-section">
+      <div class="container">
+        <div class="payment-content">
+          <h2 class="section-title">Arma tu propio paquete!!</h2>
+          <p class="section-subtitle">"Crea tu propio camino, nosotros lo hacemos realidad"</p>
+          <div class="payment-options">
+            <div class="payment-card">
+              <div class="card-icon">
+                <i class="fas fa-map-marked-alt"></i>
+              </div>
+              <h3>Elige tu destino</h3>
+              <p>Selecciona entre múltiples ubicaciones increíbles.</p>
+            </div>
+            <div class="payment-card">
+              <div class="card-icon">
+                <i class="fas fa-hiking"></i>
+              </div>
+              <h3>Selecciona actividades</h3>
+              <p>Desde aventuras extremas hasta experiencias relajantes.</p>
+            </div>
+            <div class="payment-card">
+              <div class="card-icon">
+                <i class="fas fa-glass-cheers"></i>
+              </div>
+              <h3>Vive experiencias únicas</h3>
+              <p>Degustaciones gastronómicas, recorridos culturales y más..</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    <div class="payment-card">
+      <div class="card-icon">
+        <i class="fas fa-utensils"></i>
+      </div>
+      <h3>Perzonaliza servicios</h3>
+      <p>Añade transporte, alojamiento y más.</p>
+      <button id="checkout-button-3" class="checkout-btn">
+        <span>Pagar ahora</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div> -->
+
     <!-- SECCIÓN: HERO - OPCIONES PRINCIPALES -->
     <section id="hero-section">
-
-      <!-- <div class="welcome-title slide-in">Descubre Nuestros Paquetes</div> -->
-
       <!-- Nueva sección: Paquetes de Viaje -->
       <div class="cont s--inactive">
-        <div class="welcome-title slide-in">Descubre Nuestros Paquetes</div>
+        <div class="welcome-title slide-in">Descubre tu destino</div>
 
         <!-- Botones de navegación -->
         <div class="packages-navigation">
@@ -554,10 +595,10 @@
     </section>
     <!-- <div class="section-box fade-in">Contenido que aparecerá con fade</div> -->
 
-    <!-- <section id="payment-section">
+    <section id="payment-section">
       <div class="container">
         <div class="payment-content">
-          <h2 class="section-title">Realiza tu Reserva</h2>
+          <h2 class="section-title">Arma tu propio paquete!!</h2>
           <p class="section-subtitle">Asegura tu lugar en nuestras experiencias gastronómicas</p>
           <div class="payment-options">
             <div class="payment-card">
@@ -574,7 +615,7 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
 
     <!-- SECCIÓN: GALERÍA -->
     <section id="gallery-section">
@@ -853,16 +894,20 @@
             <span id="cart-total-price">$0.00</span>
           </div>
           <div class="cart-actions">
-            <button class="clear-cart-btn">Vaciar Carrito</button>
-            <button class="checkout-cart-btn">Proceder al Pago</button>
-            <button class="whatsapp-help-btn">
+            <button id="checkout-button-3" class="checkout-btn">
               <i class="fab fa-whatsapp"></i> Solicitar Asesoría
+            </button>
+            <button id="checkout-button-2" class="checkout-btn">
+              <span>Vaciar el carrito</span>
+            </button>
+            <button id="checkout-button-1" class="checkout-btn">
+              <span>Proceder al pago</span>
+              <i class="fas fa-arrow-right"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Scripts -->

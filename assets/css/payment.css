@@ -80,6 +80,7 @@
   font-family: var(--font-vintage-4);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 1rem;
+  margin-top: 2em;
   color: var(--color1);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -94,8 +95,9 @@
 
 .payment-options {
   display: flex;
-  justify-content: center;
-  margin-top: 3rem;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: nowrap;
 }
 
 .payment-card {
@@ -152,6 +154,14 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#checkout-button-2 {
+  background: #a52019;
+}
+
+#checkout-button-3 {
+  background: #25D366;
 }
 
 .checkout-btn span {
