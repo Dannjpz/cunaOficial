@@ -20,9 +20,9 @@ const packageDetails = {
             "Día 3: Recorrido por restaurantes de autor. Cena de gala con maridaje de mezcales."
         ],
         gallery: [
-            "images/packages/gastronomica1.jpg",
-            "images/packages/gastronomica2.jpg",
-            "images/packages/gastronomica3.jpg"
+            "../images/paisaje_1.jpg",
+            "../images/paisaje_1.jpg",
+            "../images/paisaje_1.jpg"
         ]
     },
     2: {
@@ -42,9 +42,9 @@ const packageDetails = {
             "Día 2: Desayuno al amanecer. Rappel en cañón y exploración de cuevas. Regreso y despedida."
         ],
         gallery: [
-            "images/packages/aventura1.jpg",
-            "images/packages/aventura2.jpg",
-            "images/packages/aventura3.jpg"
+            "../images/paisaje_2.jpg",
+            "../images/paisaje_2.jpg",
+            "../images/paisaje_2.jpg"
         ]
     },
     3: {
@@ -66,9 +66,9 @@ const packageDetails = {
             "Día 4: Espectáculo cultural y cena de despedida."
         ],
         gallery: [
-            "images/packages/cultural1.jpg",
-            "images/packages/cultural2.jpg",
-            "images/packages/cultural3.jpg"
+            "../images/paisaje_3.jpg",
+            "../images/paisaje_3.jpg",
+            "../images/paisaje_3.jpg"
         ]
     },
     4: {
@@ -89,9 +89,9 @@ const packageDetails = {
             "Día 3: Excursión familiar y espectáculo de despedida."
         ],
         gallery: [
-            "images/packages/familiar1.jpg",
-            "images/packages/familiar2.jpg",
-            "images/packages/familiar3.jpg"
+            "../images/paisaje_4.jpg",
+            "../images/paisaje_4.jpg",
+            "../images/paisaje_4.jpg"
         ]
     },
     5: {
@@ -111,9 +111,9 @@ const packageDetails = {
             "Día 2: Visita a viñedos boutique. Experiencia de vendimia (en temporada) y cata de despedida."
         ],
         gallery: [
-            "images/packages/vinedos1.jpg",
-            "images/packages/vinedos2.jpg",
-            "images/packages/vinedos3.jpg"
+            "../images/paisaje_5.jpg",
+            "../images/paisaje_5.jpg",
+            "../images/paisaje_5.jpg"
         ]
     },
     6: {
@@ -133,9 +133,9 @@ const packageDetails = {
             "Tarde: Elaboración de plato principal y postre. Degustación y evaluación final."
         ],
         gallery: [
-            "images/packages/talleres1.jpg",
-            "images/packages/talleres2.jpg",
-            "images/packages/talleres3.jpg"
+            "../images/paisaje_6.jpg",
+            "../images/paisaje_6.jpg",
+            "../images/paisaje_6.jpg"
         ]
     },
     7: {
@@ -156,9 +156,9 @@ const packageDetails = {
             "Día 4-5: Visita a pueblos mágicos y experiencias culturales locales."
         ],
         gallery: [
-            "images/packages/historicos1.jpg",
-            "images/packages/historicos2.jpg",
-            "images/packages/historicos3.jpg"
+            "../images/paisaje_7.jpg",
+            "../images/paisaje_7.jpg",
+            "../images/paisaje_7.jpg"
         ]
     },
     8: {
@@ -180,9 +180,9 @@ const packageDetails = {
             "Día 4: Delicias del sur y sureste mexicano."
         ],
         gallery: [
-            "images/packages/regional1.jpg",
-            "images/packages/regional2.jpg",
-            "images/packages/regional3.jpg"
+            "../images/paisaje_8.jpg",
+            "../images/paisaje_8.jpg",
+            "../images/paisaje_8.jpg"
         ]
     },
     9: {
@@ -203,9 +203,9 @@ const packageDetails = {
             "Día 3: Mercado de artesanías y taller de técnica local."
         ],
         gallery: [
-            "images/packages/mercados1.jpg",
-            "images/packages/mercados2.jpg",
-            "images/packages/mercados3.jpg"
+            "../images/paisaje_9.jpg",
+            "../images/paisaje_9.jpg",
+            "../images/paisaje_9.jpg"
         ]
     },
 
@@ -227,9 +227,9 @@ const packageDetails = {
             "Día 3: Mercado de artesanías y taller de técnica local."
         ],
         gallery: [
-            "images/packages/mercados1.jpg",
-            "images/packages/mercados2.jpg",
-            "images/packages/mercados3.jpg"
+            "../images/paisaje_10.jpg",
+            "../images/paisaje_10.jpg",
+            "../images/paisaje_10.jpg"
         ]
     }
 };
