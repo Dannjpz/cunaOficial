@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/payment.css" />
   <link rel="stylesheet" href="assets/css/cart.css">
+  <link rel="stylesheet" href="assets/css/package-modal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/stripe.js"></script>
@@ -63,7 +64,7 @@
             </a>
           </li>
           <li><a href="/components/restaurante.html">Restaurante</a></li>
-          <li><a href="/components/reservar.html">Reservar</a></li>
+          <li><a href="/components/reservar.html" class="reservar-link">Reservar</a></li>
         </ul>
       </nav>
     </div>
@@ -184,27 +185,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 3 días
+                        3 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $1,500 MXN
+                        $1,500 MXN
+                      </span>
+                      <span class="package-details-info">
+                        <label>Detalles:</label>
+                        <i class="fas fa-info-circle"></i>
+                      </span>
+                      <span class="package-play">
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
                       </span>
                       <span class="package-availability">
                         <label>Personas:</label>
                         <i class="fas fa-users"></i> 1-10 personas
                       </span>
                       <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 20 Dic
-                      </span>
-                      <span class="package-details-info">
-                        <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
-                      </span>
-                      <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 20 Dic
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -244,27 +245,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 2 días
+                        2 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $1,200 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-8 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 12 Nov
+                        $1,200 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-8 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 12 Nov
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -305,27 +306,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 4 días
+                        4 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $1,800 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-15 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 07 Jul
+                        $1,800 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-15 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 07 Jul
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -365,27 +366,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 3 días
+                        3 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $2,200 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-12 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 16 sep
+                        $2,200 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-12 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 16 sep
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -425,27 +426,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 2 días
+                        2 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $1,800 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-10 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 05 agost
+                        $1,800 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-10 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 05 agost
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -485,27 +486,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 1 día
+                        1 día
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $950 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-8 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 22 Jul
+                        $950 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-8 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 22 Jul
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -545,27 +546,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 5 días
+                        5 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $2,500 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-20 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 10 jun
+                        $2,500 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-20 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 10 jun
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -605,27 +606,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 4 días
+                        4 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $2,100 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-12 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 20 mayo
+                        $2,100 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-12 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 20 mayo
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -665,27 +666,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 3 días
+                        3 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $1,750 MXN
-                      </span>
-                      <span class="package-availability">
-                        <label>Personas:</label>
-                        <i class="fas fa-users"></i> 1-15 personas
-                      </span>
-                      <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 15 abr
+                        $1,750 MXN
                       </span>
                       <span class="package-details-info">
                         <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
+                        <i class="fas fa-info-circle"></i>
                       </span>
                       <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label>Experiencia:</label>
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                      <span class="package-availability">
+                        <label>Personas:</label>
+                        1-15 personas
+                      </span>
+                      <span class="package-next-date">
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 15 abr
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -707,7 +708,6 @@
               </div>
             </div>
           </div>
-
           <!-- Paquete 10 (NUEVO) -->
           <div class="el" data-package-id="10" data-package-tags="festivales tradiciones cultural"
             data-departure-dates="2025-03-28" data-max-guests="20" data-min-guests="1">
@@ -725,27 +725,27 @@
                     <div class="package-details">
                       <span class="package-duration">
                         <label>Duración:</label>
-                        <i class="fas fa-clock"></i> 5 días
+                        5 días
                       </span>
                       <span class="package-price">
                         <label>Precio:</label>
-                        <i class="fas fa-tag"></i> $2,800 MXN
+                        $2,800 MXN
+                      </span>
+                      <span class="package-details-info">
+                        <label>Detalles:</label>
+                        <i class="fas fa-info-circle"></i>
+                      </span>
+                      <span class="package-play">
+                        <label>Video:</label>
+                        <i class="fas fa-play-circle"></i>
                       </span>
                       <span class="package-availability">
                         <label>Personas:</label>
                         <i class="fas fa-users"></i> 1-25 personas
                       </span>
                       <span class="package-next-date">
-                        <label>Fecha:</label>
-                        <i class="fas fa-calendar-alt"></i> Próxima salida: 28 mar
-                      </span>
-                      <span class="package-details-info">
-                        <label>Detalles:</label>
-                        <i class="fas fa-info-circle"></i> Ver itinerario completo
-                      </span>
-                      <span class="package-play">
-                        <label>Video:</label>
-                        <i class="fas fa-play-circle"></i> Ver experiencia
+                        <label id="fecha">Fecha:</label>
+                        Próxima salida: 28 mar
                       </span>
                     </div>
                     <div class="package-buttons">
@@ -1020,10 +1020,12 @@
       <nav class="main-nav"></nav>
       <!-- Update your image tags -->
       <div class="social-links">
-        <a href="#" class="social-link"><img loading="lazy" src="images/logotipo-de-instagram.png"
-            alt="Instagram" /></a>
-        <a href="#" class="social-link"><img loading="lazy" src="images/tik-tok.png" alt="TikTok" /></a>
-        <a href="#" class="social-link"><img loading="lazy" src="images/facebook.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/cuna.de.sabores?igsh=YnoxMHZtMTVqcGtu" target="_blank"
+          class="social-link"><img loading="lazy" src="images/logotipo-de-instagram.png" alt="Instagram" /></a>
+        <a href="https://www.tiktok.com/@cunadesabores" target="_blank" class="social-link"><img loading="lazy"
+            src="images/tik-tok.png" alt="TikTok" /></a>
+        <a href="https://www.facebook.com/share/1FuANBySM7/?mibextid=wwXIfr" target="_blank" class="social-link"><img
+            loading="lazy" src="images/facebook.png" alt="Facebook" /></a>
       </div>
     </section>
 
@@ -1085,6 +1087,23 @@
         </section>
       </footer>
     </section>
+
+    <!-- Modal informativo de paquetes -->
+    <div id="package-info-modal" class="package-info-modal">
+      <div class="package-info-content">
+        <div class="package-info-header">
+          <h2 id="package-info-title">Información del Paquete</h2>
+          <span class="package-info-close">&times;</span>
+        </div>
+        <div class="package-info-body">
+          <!-- El contenido se cargará dinámicamente -->
+        </div>
+        <div class="package-info-footer">
+          <button class="package-info-btn">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal del carrito -->
     <div id="cart-modal" class="cart-modal">
       <div class="cart-content">
@@ -1126,21 +1145,21 @@
   <script src="assets/js/recorridos/search-sync.js"></script>
   <script src="assets/js/recorridos/header-search-visibility.js"></script>
   <script src="assets/js/recorridos/search-sections.js"></script>
-  <!-- <script src="assets/js/recorridos/guests-dropdown.js"></script> -->
   <script src="assets/js/recorridos/date-picker.js"></script>
   <script src="assets/js/recorridos/sections-slider.js"></script>
-  <!-- <script src="assets/js/recorridos/price-calculator.js"></script> -->
   <script src="assets/js/recorridos/search-improvements.js"></script>
   <script src="assets/js/recorridos/search-navigation.js"></script>
   <script src="assets/js/gallery.js"></script>
   <script type="module" src="assets/js/butterflies-gallery.js"></script>
-  <script type="module" src="assets/js/faq.js"></script>
+  <script type="module" src="assets/js/recorridos/faq.js"></script>
   <script type="module" src="assets/js/recorridos/sections-filter.js"></script>
   <script src="assets/js/stripe.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/payment-effects.js"></script>
-  <script src="assets/js/cart.js" defer></script>
-  <script src="assets/js/package-customizer.js"></script>
+  <script src="assets/js/recorridos/cart.js" defer></script>
+  <script src="assets/js/recorridos/package-customizer.js"></script>
+  <script src="assets/js/recorridos/package-modal.js"></script>
+
   <!-- Añadir los event listeners para los nuevos botones al final del body -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1149,6 +1168,21 @@
       if (proceedPaymentBtn) {
         proceedPaymentBtn.addEventListener('click', function () {
           window.location.href = '/components/payment.html';
+        });
+      }
+    });
+  </script>
+  <script>
+    // Script para el desplazamiento suave al hacer clic en "Reservar"
+    document.addEventListener('DOMContentLoaded', function () {
+      const reservarLink = document.querySelector('.reservar-link');
+      if (reservarLink) {
+        reservarLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          const heroSection = document.getElementById('hero-section');
+          if (heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth' });
+          }
         });
       }
     });

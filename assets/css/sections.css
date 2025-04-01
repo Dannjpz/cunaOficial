@@ -453,7 +453,7 @@
     color: #f0f0f0;
 }
 
-.el__text .package-details {
+/* .el__text .package-details {
     display: flex;
     flex-wrap: nowrap;
     gap: 15px;
@@ -463,6 +463,17 @@
     flex-direction: row;
     align-items: flex-start;
     align-content: center;
+} */
+
+.el__text .package-details {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin-bottom: -200px;
+    font-size: 14px;
+    text-transform: none;
+    flex-direction: row;
+    align-content: stretch;
 }
 
 .el__text .package-guests-selector {
@@ -474,7 +485,6 @@
     font-weight: 600;
     border-radius: 8px;
     padding: 5px 19px;
-    margin-top: 50px;
 }
 
 .el__text .package-button {
@@ -817,42 +827,172 @@
     margin-bottom: 20px;
 }
 
+/* Mejoras para los detalles de paquetes */
 .package-details {
-    font-size: 2rem;
-    /* Detalles del paquete más grandes */
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    margin-bottom: 20px;
+    margin: 20px 0;
+    font-family: var(--font-sans);
 }
 
-.package-details span {
-    display: inline-flex;
-    align-items: center;
-    gap: 1px;
-    margin: 0;
-    /* Ensure no margin */
-    margin-top: 50px;
-    padding-right: 15px;
-    /* Add controlled spacing if needed */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+.package-details span,
+.package-details .package-guests-selector {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
     border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.package-details span:hover,
+.package-details .package-guests-selector:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* .package-details span {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 32px;
-    padding-bottom: 32px;
+    align-content: stretch;
+} */
+
+/* .package-details span {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+} */
+
+.package-details span {
+    display: grid;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-content: stretch;
+    align-items: start;
+    justify-items: center;
+}
+
+.package-details span:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.package-details label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--color1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.guests-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.guests-control-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.guests-control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.guests-control-btn i.fas.fa-plus,
+.guests-control-btn i.fas.fa-minus {
+    color: #000;
+    /* Color negro para los iconos */
+}
+
+.guests-display {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0 10px;
 }
 
 .package-details i {
-    font-size: 2rem;
-    /* Iconos ligeramente más grandes */
+    margin-right: 8px;
+    color: var(--color1);
+    font-size: 1.1rem;
+}
+
+.package-details-info,
+.package-play {
+    cursor: pointer;
+}
+
+.package-details-info .fa-info-circle,
+.package-play .fa-play-circle {
+    font-size: 3rem;
+}
+
+.package-play i {
+    color: var(--secondary-color);
+}
+
+
+.package-play i {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.package-play i:hover {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+    ;
+}
+
+.package-details-info i {
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.package-details-info i:hover {
+    transform: scale(1.2);
+    color: var(--color1);
 }
 
 .package-details .fa-tag,
 .package-details .fa-clock,
-.package-next-date .fa-calendar-alt{
+.package-next-date .fa-calendar-alt {
     padding-right: 10px;
     padding-left: 20px;
+    padding-top: 10px;
+    display: flex;
+    padding-bottom: 10px;
+}
+
+#fecha {
+    padding-bottom: 5px;
+    display: flex;
+    padding-bottom: 25px;
 }
 
 /* Add these styles after your existing .nav-btn styles */

@@ -83,13 +83,13 @@ function createGuestsSelectorHTML(packageId, minGuests, maxGuests) {
             <label for="guests-input-${packageId}">Personas:</label>
             <div class="guests-input-container">
                 <button class="guests-control-btn decrease-guests" data-package-id="${packageId}">
-                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-minus" style="position: relative; right: -3px;"></i>
                 </button>
                 <div class="guests-display" id="guests-display-${packageId}">${minGuests}</div>
                 <input type="hidden" id="guests-input-${packageId}" class="package-guests-input" 
                        min="${minGuests}" max="${maxGuests}" value="${minGuests}">
                 <button class="guests-control-btn increase-guests" data-package-id="${packageId}">
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-plus" style="position: relative; right: -3px;"></i>
                 </button>
             </div>
         </div>
@@ -162,7 +162,16 @@ function initGuestsSelector(packageId, basePrice, dateEl) {
         // Actualizar el precio mostrado en la tarjeta del paquete
         const priceElement = document.querySelector(`.el[data-package-id="${packageId}"] .package-price`);
         if (priceElement) {
-            priceElement.innerHTML = `<i class="fas fa-tag"></i> $${totalPrice.toLocaleString()} MXN`;
+            // Preservar la etiqueta label al actualizar el precio
+            const labelElement = priceElement.querySelector('label');
+            if (labelElement) {
+                priceElement.innerHTML = '';
+                priceElement.appendChild(labelElement);
+                priceElement.innerHTML += `$${totalPrice.toLocaleString()} MXN`;
+            } else {
+                // Si no hay label, crear uno nuevo
+                priceElement.innerHTML = `<label>Precio:</label> $${totalPrice.toLocaleString()} MXN`;
+            }
         }
 
         // Mostrar promoción solo cuando hay exactamente 10 personas y no se ha mostrado antes

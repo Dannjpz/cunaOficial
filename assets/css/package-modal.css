@@ -1,0 +1,164 @@
+/* Estilos para el modal informativo de paquetes */
+.package-info-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.package-info-content {
+    position: relative;
+    background-color: var(--colorFondoContraste);
+    margin: 5% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.4s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.package-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color1);
+    padding-bottom: 15px;
+}
+
+.package-info-header h2 {
+    color: var(--color1);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.package-info-close {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color1);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.package-info-close:hover {
+    color: var(--color2);
+}
+
+.package-info-body {
+    margin-bottom: 20px;
+}
+
+.package-info-section {
+    margin-bottom: 25px;
+}
+
+.package-info-section h3 {
+    color: var(--color2);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.package-info-section p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.package-info-list {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+.package-info-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.package-info-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color1);
+    font-weight: bold;
+}
+
+.package-info-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.package-info-btn {
+    padding: 10px 20px;
+    background-color: var(--color1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.package-info-btn:hover {
+    background-color: var(--color2);
+}
+
+/* Estilos para la galería de imágenes dentro del modal */
+.package-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.package-gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.package-gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .package-info-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .package-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .package-gallery {
+        grid-template-columns: 1fr;
+    }
+}
